@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Cáo Anh Hùng Giải Cứu Sóc Yêu</title>
+    <link rel="stylesheet" href="style.css"> </head>
+<body>
+    <div id="game-container">
+        <div id="main-menu">
+            <h1>Cáo Anh Hùng Giải Cứu Sóc Yêu</h1>
+            <button id="new-game-btn">Chơi Mới</button>
+            <button id="continue-btn">Tiếp Tục</button> <button id="keepsake-house-btn">Ngôi Nhà Kỷ Niệm</button>
+            <button id="exit-btn">Thoát</button>
+        </div>
+
+        <div id="game-area" style="display: none;">
+            <p>Game sẽ hiển thị ở đây...</p>
+        </div>
+
+        <div id="game-over-screen" style="display: none;">
+            <h2>Game Over!</h2>
+            <p>Điểm của bạn: <span id="final-score">0</span></p>
+            <button id="retry-btn">Chơi Lại Màn</button>
+            <button id="back-to-map-btn-gameover">Về Bản Đồ</button>
+        </div>
+
+        <div id="level-complete-screen" style="display: none;">
+            <h2>Hoàn Thành Màn!</h2>
+            <p>Điểm số: <span id="level-score">0</span></p>
+            <p>Sao đạt được: <span id="stars-earned">0</span></p>
+            <button id="next-level-btn">Tiếp Tục</button>
+        </div>
+
+    </div>
+
+    <script src="game.js"></script> </body>
+</html>
