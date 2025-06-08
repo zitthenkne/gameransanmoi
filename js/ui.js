@@ -1,4 +1,4 @@
-// js/ui.js
+// js/ui.js (Phiên bản sửa lỗi TypeError)
 
 import { STORY_DATA, LEVELS } from './constants.js';
 import { startGame } from './game.js';
@@ -22,9 +22,9 @@ export function hideAllScreens() {
 }
 
 export function showScreen(screenId) {
-    // Ẩn tất cả các màn hình chính khác trước
+    // Ẩn các màn hình chính khác trước
     ALL_SCREENS.forEach(id => {
-        if (id !== screenId) {
+        if (id !== screenId && id !== 'level-complete-screen' && id !== 'letter-screen' && id !== 'game-over-screen') {
              const el = document.getElementById(id);
              if (el && !el.classList.contains('hidden')) {
                   el.classList.add('hidden');
@@ -38,15 +38,22 @@ export function showScreen(screenId) {
     }
 }
 
-// Hàm showPopup và hidePopup để hiện/ẩn các pop-up nhỏ mà không ẩn toàn bộ màn hình game
+// SỬA LỖI: Thêm kiểm tra an toàn
 export function showPopup(popupId) {
+    console.log(`Đang cố gắng hiển thị popup: #${popupId}`);
     const popupElement = document.getElementById(popupId);
-    if (popupElement) popupElement.classList.remove('hidden');
+    if (popupElement) {
+        popupElement.classList.remove('hidden');
+    } else {
+        console.error(`KHÔNG TÌM THẤY POPUP với ID: #${popupId}.`);
+    }
 }
 
 export function hidePopup(popupId) {
     const popupElement = document.getElementById(popupId);
-    if (popupElement) popupElement.classList.add('hidden');
+    if (popupElement) {
+        popupElement.classList.add('hidden');
+    }
 }
 
 function endStoryScene() {
@@ -59,7 +66,6 @@ function endStoryScene() {
 export function advanceDialogue() {
     const dialogueName = document.getElementById('dialogue-npc-name');
     const dialogueText = document.getElementById('dialogue-text');
-
     if (storyNpc && storyDialogueIndex < storyNpc.dialogue.length) {
         dialogueName.textContent = storyNpc.name;
         dialogueText.textContent = storyNpc.dialogue[storyDialogueIndex];
@@ -73,7 +79,6 @@ export function advanceImage() {
     const storyImageEl = document.getElementById('story-image');
     const dialogueBox = document.getElementById('dialogue-box');
     const nextImageBtn = document.getElementById('story-next-image-btn');
-
     if (storyImageIndex < storyImages.length) {
         storyImageEl.src = storyImages[storyImageIndex];
         dialogueBox.classList.add('hidden');
@@ -126,16 +131,27 @@ export function showWorldMap() {
     showScreen('world-map-screen');
 }
 
+// SỬA LỖI: Logic hiển thị màn hình kỷ vật
 export function showLetter() {
     const keepsakeData = LEVELS[state.currentLevelIndex].keepsake;
-    document.getElementById('letter-title').textContent = keepsakeData.title;
-    document.getElementById('letter-text').textContent = keepsakeData.text;
+    const letterScreen = document.getElementById('letter-screen');
+    const letterTitle = document.getElementById('letter-title');
+    const letterText = document.getElementById('letter-text');
     const letterImage = document.getElementById('letter-image');
-    if (keepsakeData.image) {
-        letterImage.src = keepsakeData.image;
-        letterImage.classList.remove('hidden');
+
+    if (letterScreen && letterTitle && letterText && letterImage) {
+        letterTitle.textContent = keepsakeData.title;
+        letterText.textContent = keepsakeData.text;
+
+        if (keepsakeData.image) {
+            letterImage.src = keepsakeData.image;
+            letterImage.classList.remove('hidden');
+        } else {
+            letterImage.classList.add('hidden');
+        }
+        // Gọi hàm showPopup an toàn
+        showPopup('letter-screen');
     } else {
-        letterImage.classList.add('hidden');
+        console.error("Không tìm thấy các thành phần của màn hình kỷ vật.");
     }
-    showPopup('letter-screen');
 }
