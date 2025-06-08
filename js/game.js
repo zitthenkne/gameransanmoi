@@ -1,4 +1,4 @@
-// js/game.js
+// js/game.js (Khôi phục lại Nhím)
 
 import { allAudio, stopAllSounds } from './audio.js';
 import { LEVELS } from './constants.js';
@@ -57,8 +57,6 @@ function initializeLevelGameplay(levelIndex) {
     changingDirection = false;
     
     let isShieldActive = false;
-
-    // THÊM VÀO: Các biến trạng thái cho kỷ vật
     let keepsakeSpawned = false;
     let keepsake = {};
 
@@ -101,7 +99,6 @@ function initializeLevelGameplay(levelIndex) {
         } while (isOverlapping);
     }
     
-    // THÊM VÀO: Hàm để tạo kỷ vật trên bản đồ
     function spawnKeepsake() {
         allAudio.keepsakeFound.play();
         const gridWidth = canvas.width / gridSize;
@@ -166,7 +163,6 @@ function initializeLevelGameplay(levelIndex) {
         });
     }
 
-    // THÊM VÀO: Hàm để vẽ kỷ vật
     function drawKeepsake() {
         if (!keepsakeSpawned) return;
         const keepsakeImgKey = levelData.keepsake.imageKey;
@@ -183,33 +179,71 @@ function initializeLevelGameplay(levelIndex) {
         obstacles.forEach(obs => drawPart(obsImg, obs));
     }
 
+    // KHÔI PHỤC LẠI: Hàm vẽ nhím
     function drawHedgehogs() {
-        // ... (nội dung không đổi)
+        const hedgehogImg = images.hedgehog;
+        if (!hedgehogImg || !hedgehogs) return;
+        hedgehogs.forEach(h => drawPart(hedgehogImg, h));
     }
     
     function drawLoveTraceItem() {
-        // THAY ĐỔI: Không vẽ Dấu Vết Tình Yêu nữa nếu kỷ vật đã xuất hiện
         if (keepsakeSpawned) return;
         if(images.loveTrace && loveTrace.x !== undefined) {
             drawPart(images.loveTrace, loveTrace);
         }
     }
 
+    // KHÔI PHỤC LẠI: Hàm di chuyển nhím
     function updateHedgehogs() {
-        // ... (nội dung không đổi)
+        if (!hedgehogs) return;
+        hedgehogMoveCounter++;
+        if (hedgehogMoveCounter < 2) return;
+        hedgehogMoveCounter = 0;
+        
+        hedgehogs.forEach(h => {
+            h.x += h.dx; h.y += h.dy; h.moved++;
+            if (h.moved >= h.range) {
+                h.dx *= -1; h.dy *= -1;
+                h.moved = 0;
+            }
+        });
     }
 
     function isGameOver(head) {
-        // ... (nội dung không đổi)
+        const gridWidth = canvas.width / gridSize;
+        const gridHeight = canvas.height / gridSize;
+        let collided = false;
+        
+        if (head.x < 0 || head.x >= gridWidth || head.y < 0 || head.y >= gridHeight) collided = true;
+        for (let i = 1; i < fox.body.length; i++) if (head.x === fox.body[i].x && head.y === fox.body[i].y) collided = true;
+        if ((obstacles || []).some(obs => obs.x === head.x && obs.y === head.y)) collided = true;
+        if ((hedgehogs || []).some(h => h.x === head.x && h.y === head.y)) collided = true;
+        
+        if (collided) {
+            if (isShieldActive) {
+                isShieldActive = false; 
+                return false; 
+            }
+            return true;
+        }
+        return false;
     }
     
     function applySlowmo() {
-        // ... (nội dung không đổi)
+        clearInterval(gameInterval);
+        currentGameSpeed = baseGameSpeed * 2;
+        gameInterval = setInterval(gameLoop, currentGameSpeed);
+        
+        setTimeout(() => {
+            clearInterval(gameInterval);
+            currentGameSpeed = baseGameSpeed;
+            gameInterval = setInterval(gameLoop, currentGameSpeed);
+        }, 5000);
     }
 
     function gameLoop() {
         changingDirection = false;
-        updateHedgehogs();
+        updateHedgehogs(); // Đảm bảo hàm này được gọi
         const head = {x: fox.body[0].x + dx, y: fox.body[0].y + dy};
         
         if (isGameOver(head)) {
@@ -235,23 +269,19 @@ function initializeLevelGameplay(levelIndex) {
             powerups.splice(powerupIndex, 1);
         }
 
-        // THAY ĐỔI: Logic khi ăn
         let hasEaten = false;
-        // Nếu kỷ vật đã xuất hiện, kiểm tra va chạm với kỷ vật
         if (keepsakeSpawned) {
             if (head.x === keepsake.x && head.y === keepsake.y) {
                 onLevelComplete();
                 return;
             }
         } 
-        // Nếu chưa, kiểm tra va chạm với Dấu Vết Tình Yêu
         else if (head.x === loveTrace.x && head.y === loveTrace.y) {
             hasEaten = true;
             score += 10;
             scoreElement.textContent = score;
             allAudio.eat.currentTime = 0; allAudio.eat.play();
             
-            // Nếu đủ điểm và kỷ vật chưa xuất hiện -> cho xuất hiện
             if (score >= winScore && !keepsakeSpawned) {
                 keepsakeSpawned = true;
                 spawnKeepsake();
@@ -260,7 +290,6 @@ function initializeLevelGameplay(levelIndex) {
             }
         }
         
-        // Chỉ xóa đuôi nếu không ăn gì cả
         if (!hasEaten) {
             fox.body.pop();
         }
@@ -268,9 +297,9 @@ function initializeLevelGameplay(levelIndex) {
         ctx.clearRect(0, 0, canvas.width, canvas.height);
         drawObstacles(); 
         drawLoveTraceItem(); 
-        drawHedgehogs(); 
+        drawHedgehogs(); // Đảm bảo hàm này được gọi
         drawPowerups();
-        drawKeepsake(); // THÊM VÀO
+        drawKeepsake();
         drawFox();
     }
     
