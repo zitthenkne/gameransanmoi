@@ -1,10 +1,10 @@
-// js/game.js (Phiên bản cuối cùng)
+// js/game.js (Phiên bản cuối cùng, đã sửa lỗi)
 
 import { allAudio, stopAllSounds } from './audio.js';
 import { LEVELS } from './constants.js';
 import { state } from './state.js';
 import { images } from './loader.js';
-// Thêm "hidePopup" vào danh sách import dưới đây
+// THÊM "hidePopup" VÀO DANH SÁCH IMPORT DƯỚI ĐÂY
 import { showPopup, hidePopup, showStoryScene, showScreen } from './ui.js';
 
 let gameInterval;
@@ -28,7 +28,7 @@ export function startGame() {
     const levelIndex = state.currentLevelIndex;
     
     // Khi bắt đầu màn chơi, ẩn bản đồ và hiện khu vực game
-    hidePopup('world-map-screen'); // Bây giờ hàm này đã được định nghĩa
+    hidePopup('world-map-screen'); // Bây giờ hàm này đã được định nghĩa và sẽ chạy được
     showScreen('game-area');
 
     // Bắt đầu logic của màn chơi
