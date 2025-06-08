@@ -1,4 +1,4 @@
-// js/game.js
+// js/game.js (Phiên bản đã dọn dẹp)
 
 import { allAudio, stopAllSounds } from './audio.js';
 import { LEVELS } from './constants.js';
@@ -10,7 +10,7 @@ let gameInterval;
 let dx = 1, dy = 0;
 let changingDirection = false;
 
-// XÓA BỎ hàm isTouchDevice() ở đây
+// ĐÃ XÓA HÀM isTouchDevice()
 
 export function setDirection(keyPressed) {
     if (changingDirection) return;
@@ -33,7 +33,8 @@ export function startGame() {
         hidePopup('world-map-screen');
         showScreen('game-area');
 
-        // XÓA BỎ đoạn mã kiểm tra và hiển thị nút điều khiển ở đây
+        // ĐÃ XÓA LOGIC KIỂM TRA THIẾT BỊ CẢM ỨNG Ở ĐÂY
+        // CSS sẽ tự động xử lý việc ẩn/hiện các nút điều khiển
 
         initializeLevelGameplay(levelIndex);
     });
