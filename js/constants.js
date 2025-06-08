@@ -1,6 +1,7 @@
-// js/constants.js (Cập nhật cuối cùng)
+// js/constants.js
 
 export const STORY_DATA = {
+    // ... (nội dung không đổi)
     gameIntro: {
         images: ['assets/story/intro_1.png', 'assets/story/intro_2.png', 'assets/story/intro_3.png'],
     },
@@ -61,16 +62,16 @@ export const LEVELS = [
         level: 1, 
         winScore: 50,
         startPos: { x: 10, y: 10 },
-        // KHÔI PHỤC: Chướng ngại vật riêng
         obstacleImageKey: "obstacle_tree", 
         obstacles: [ {x: 3, y: 3}, {x: 3, y: 4}, {x: 16, y: 11}, {x: 10, y: 2}, {x: 12, y: 8} ],
         hedgehogs: [ { x: 2, y: 8, dx: 0, dy: 1, range: 4, moved: 0 }, { x: 13, y: 4, dx: 1, dy: 0, range: 5, moved: 0 } ],
-        // KHÔI PHỤC: Vật phẩm tăng sức mạnh
         powerups: [
             { x: 15, y: 2, type: 'shield' },
             { x: 5, y: 12, type: 'slowmo' }
         ],
         keepsake: {
+            // THÊM VÀO: Khóa để tham chiếu đến hình ảnh kỷ vật
+            imageKey: "keepsake_1_item",
             title: "Đi off clb tại Vũng Tàu",
             text: "Hôm đó là một ngày rất đáng nhớ, tui quài hỏng có quên hôm đó tui tỉnh tò nhà mik mà nhà mik lại từ chúi, bùn quớ lun á.",
             image: "assets/keepsake_1.png"
@@ -86,6 +87,7 @@ export const LEVELS = [
             { x: 1, y: 7, type: 'shield' }
         ],
         keepsake: {
+            imageKey: "keepsake_2_item",
             title: "Ly Sinh Tố Mát Lạnh",
             text: "Trời nóng mà có một ly sinh tố mát lạnh như thế này thì thật tuyệt. Nhưng sẽ còn tuyệt hơn nữa nếu có em ở bên, cùng nhau thưởng thức, cùng nhau nói những câu chuyện không đầu không cuối.",
             image: "assets/keepsake_2.png"
@@ -101,6 +103,7 @@ export const LEVELS = [
             { x: 10, y: 10, type: 'slowmo' }
         ],
         keepsake: {
+            imageKey: "keepsake_3_item",
             title: "Đêm hội trăng rằm",
             text: "Hjhj tui biết là nhà mik lên TBTC rất nà áp lực lun ớ, kiểu chịu đủ thứ chuyện, rồi điều hành quá chời chời lun, lúc đó tui cũng bị áp lực dữ khi mò nhà mik mãi hem có tỏ tình tui để 2 mik chính thức quen nhau dì hớt chơn á, người ta nói tui cũng ovtk nhắmmm",
             image: "assets/keepsake_3.png"
@@ -117,6 +120,7 @@ export const LEVELS = [
             { x: 18, y: 13, type: 'slowmo' }
         ],
         keepsake: {
+            imageKey: "keepsake_4_item",
             title: "Đồng Đội Chơi Game",
             text: "Hehe, nhà mik là người con trai đầu tiên tui chơi LQ chung á, cũng nhiều cung bậc cảm xúc dới cái game nì quá ha, cãi nhau gòi cừi khà khà nì, nhà mik cứ cay cú tui chơi con Ishar quài hehe",
             image: "assets/keepsake_4.png"
@@ -129,6 +133,7 @@ export const LEVELS = [
         hedgehogs: [ { x: 1, y: 1, dx: 1, dy: 0, range: 17, moved: 0 }, { x: 18, y: 3, dx: -1, dy: 0, range: 17, moved: 0 }, { x: 1, y: 5, dx: 1, dy: 0, range: 17, moved: 0 }, { x: 18, y: 7, dx: -1, dy: 0, range: 17, moved: 0 }, { x: 1, y: 9, dx: 1, dy: 0, range: 17, moved: 0 }, { x: 18, y: 11, dx: -1, dy: 0, range: 17, moved: 0 } ],
         powerups: [],
         keepsake: {
+            imageKey: "keepsake_5_item",
             title: "Valentine của chúng ta",
             text: "Ei bà ui, tui gất nà thích hôm đó lun á, mặc dù vừa qua 14/2 thì mik cãi nhau khà khà, nhưng mà kiểu tâm tư tui dành dô món quà hay gì đó, kiểu ngày hôm đó tui thấy siu hạnh phúc lun ớ, đặc biệt là hôm đó tui có bà là người đó valentine dới tuiiiii",
             image: "assets/keepsake_5.png"

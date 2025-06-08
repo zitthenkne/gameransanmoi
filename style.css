@@ -33,6 +33,7 @@ h1, h2, h3 {
 
 h1 { font-size: 2.5em; }
 h2 { font-size: 2em; }
+h3 { margin-bottom: 5px; }
 
 button { 
     font-family: 'Mali', sans-serif;
@@ -89,6 +90,7 @@ button:hover {
     width: 90%; 
     max-width: 500px; 
     border-top: 8px solid #f0ad4e;
+    display: flex;
     flex-direction: column;
     max-height: 85vh;
     overflow-y: auto;
@@ -98,6 +100,27 @@ button:hover {
 #level-complete-screen { border-color: #5cb85c; }
 #letter-screen { border-color: #5bc0de; }
 #world-map-screen { border-color: #337ab7; }
+
+/* --- THÊM VÀO: Canh chỉnh cho màn hình kỷ vật --- */
+#letter-text {
+    margin-top: 10px;
+    font-size: 1.1em;
+    color: #333;
+}
+#letter-image {
+    display: block;
+    max-width: 90%;
+    max-height: 280px;
+    margin: 15px auto;
+    border-radius: 8px;
+    object-fit: contain;
+    border: 3px solid #e0cda8;
+}
+.letter-buttons {
+    display: flex;
+    justify-content: center;
+    margin-top: 15px;
+}
 
 /* --- Các nút chọn màn chơi --- */
 #level-selection-container { 
@@ -137,7 +160,7 @@ button:hover {
     width: 100%;
     height: 100%;
     background-color: rgba(0, 0, 0, 0.85);
-    display: flex; /* <-- ĐÃ SỬA LỖI TẠI ĐÂY: Xóa bỏ comment để kích hoạt lại thuộc tính này */
+    display: flex;
     justify-content: center;
     align-items: center;
     flex-direction: column;
