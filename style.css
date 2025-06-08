@@ -1,0 +1,237 @@
+/* --- Cài đặt chung & Font chữ mới --- */
+body { 
+    background-color: #fdf6e3; 
+    font-family: 'Mali', sans-serif; 
+    display: flex; 
+    justify-content: center; 
+    align-items: center; 
+    min-height: 100vh;
+    margin: 0;
+    padding: 20px 0; 
+    box-sizing: border-box; 
+}
+
+#game-container { 
+    text-align: center; 
+    position: relative;
+    padding: 10px;
+    background-color: #fffaf0;
+    border-radius: 20px;
+    box-shadow: 0 8px 16px rgba(0,0,0,0.1);
+    max-width: 95%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    max-height: 95vh;
+    overflow-y: auto;
+}
+
+h1, h2, h3 { 
+    color: #d9534f; 
+    font-weight: 600;
+}
+
+h1 { font-size: 2.5em; }
+h2 { font-size: 2em; }
+
+button { 
+    font-family: 'Mali', sans-serif;
+    font-size: 1.1em; 
+    padding: 12px 25px; 
+    margin: 8px; 
+    cursor: pointer; 
+    border-radius: 30px; 
+    border: none;
+    background-color: #f0ad4e; 
+    color: white;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1);
+    transition: all 0.2s ease-in-out;
+}
+
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0,0,0,0.15);
+}
+
+#main-menu button {
+    background-color: #5cb85c; 
+}
+
+#game-canvas { 
+    background-color: transparent; 
+    border: 4px solid #e0e0e0;
+    border-radius: 10px;
+    max-width: 100%;
+}
+
+#hud { 
+    font-size: 24px; 
+    font-weight: bold; 
+    color: #333; 
+    padding-bottom: 10px; 
+}
+
+/* --- Các màn hình Pop-up --- */
+#game-over-screen, #level-complete-screen, #letter-screen, #world-map-screen { 
+    display: none; /* Trạng thái ban đầu là ẩn */
+    position: fixed; 
+    top: 50%; 
+    left: 50%; 
+    transform: translate(-50%, -50%); 
+    background-color: rgba(255, 250, 240, 0.98); 
+    border-radius: 15px; 
+    padding: 25px; 
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2); 
+    text-align: center; 
+    z-index: 100; 
+    width: 90%; 
+    max-width: 500px; 
+    border-top: 8px solid #f0ad4e;
+    flex-direction: column;
+    max-height: 85vh;
+    overflow-y: auto;
+}
+
+#game-over-screen { border-color: #d9534f; }
+#level-complete-screen { border-color: #5cb85c; }
+#letter-screen { border-color: #5bc0de; }
+#world-map-screen { border-color: #337ab7; }
+
+/* --- Các nút chọn màn chơi --- */
+#level-selection-container { 
+    display: flex; 
+    flex-wrap: wrap; 
+    justify-content: center; 
+    gap: 15px; 
+    margin: 20px 0; 
+}
+
+.level-button { 
+    width: 100px; 
+    height: 80px; 
+    font-size: 24px; 
+}
+
+.level-button.locked { 
+    background-color: #ccc; 
+    border-color: #888; 
+    color: #555; 
+    cursor: not-allowed; 
+    box-shadow: none;
+    transform: none;
+}
+.level-button.locked:hover { transform: none; box-shadow: none; }
+.level-button.locked::after { content: '🔒'; position: absolute; top: 5px; right: 5px; font-size: 16px; }
+
+/* --- CSS CHO MÀN HÌNH KỂ CHUYỆN --- */
+.hidden {
+    display: none !important;
+}
+
+#story-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.85);
+    display: none; /* Trạng thái ban đầu là ẩn */
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    z-index: 200;
+}
+
+#story-image {
+    max-width: 90%;
+    max-height: 80%;
+    border: 5px solid #e0cda8;
+    border-radius: 10px;
+    box-shadow: 0 0 20px rgba(255, 255, 255, 0.5);
+    object-fit: contain;
+}
+
+#dialogue-box {
+    position: absolute;
+    bottom: 5%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 700px;
+    background-color: rgba(20, 15, 40, 0.85);
+    border: 3px solid #e0cda8;
+    border-radius: 15px;
+    padding: 20px;
+    color: white;
+    box-shadow: 0 0 15px black;
+}
+
+#dialogue-npc-name {
+    font-size: 1.5em;
+    font-weight: bold;
+    color: #ffd700;
+    margin: 0 0 10px 0;
+    text-align: left;
+}
+
+#dialogue-text {
+    font-size: 1.2em;
+    margin: 0 0 20px 0;
+    min-height: 50px;
+    text-align: left;
+    white-space: pre-wrap;
+}
+
+#dialogue-next-btn {
+    display: block;
+    margin-left: auto;
+    margin-right: 0;
+}
+
+.next-btn-overlay {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    font-size: 1.2em;
+    padding: 10px 20px;
+    background-color: #5cb85c;
+}
+
+#mobile-controls {
+    padding-top: 15px; 
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+}
+
+.d-pad-btn {
+    width: 70px;
+    height: 70px;
+    font-size: 2em;
+    padding: 0;
+    margin: 0;
+    border-radius: 50%;
+    background: rgba(0, 0, 0, 0.4);
+    border: 2px solid rgba(255, 255, 255, 0.5);
+    color: white;
+    line-height: 60px;
+}
+
+.middle-controls {
+    display: flex;
+    gap: 80px;
+}
+
+@media (max-width: 600px) {
+    h1 { font-size: 1.5em; }
+    h2 { font-size: 1.2em; }
+    button { padding: 10px 15px; font-size: 1em; }
+    #game-over-screen, #level-complete-screen, #letter-screen, #world-map-screen {
+        padding: 20px;
+        width: 95%;
+    }
+}

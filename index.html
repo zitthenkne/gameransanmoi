@@ -4,35 +4,69 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Cáo Anh Hùng Giải Cứu Sóc Yêu</title>
-    <link rel="stylesheet" href="style.css"> </head>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Mali:wght@400;600&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
 <body>
     <div id="game-container">
         <div id="main-menu">
             <h1>Cáo Anh Hùng Giải Cứu Sóc Yêu</h1>
-            <button id="new-game-btn">Chơi Mới</button>
-            <button id="continue-btn">Tiếp Tục</button> <button id="keepsake-house-btn">Ngôi Nhà Kỷ Niệm</button>
-            <button id="exit-btn">Thoát</button>
+            <button id="new-game-btn">Bắt Đầu Hành Trình</button>
         </div>
 
+        <div id="world-map-screen" style="display: none;">
+            <h2>Bản Đồ Hành Trình</h2>
+            <div id="level-selection-container"></div>
+            <button id="map-back-to-menu-btn">Về Menu Chính</button>
+        </div>
+        
         <div id="game-area" style="display: none;">
-            <p>Game sẽ hiển thị ở đây...</p>
+            <div id="hud"><span>Điểm: </span><span id="score">0</span></div>
+            <canvas id="game-canvas" width="800" height="600"></canvas>
+            <div id="mobile-controls" class="hidden">
+                <button id="ctrl-up" class="d-pad-btn">▲</button>
+                <div class="middle-controls">
+                    <button id="ctrl-left" class="d-pad-btn">◄</button>
+                    <button id="ctrl-right" class="d-pad-btn">►</button>
+                </div>
+                <button id="ctrl-down" class="d-pad-btn">▼</button>
+            </div>
+        </div>
+
+        <div id="story-screen" class="hidden">
+            <img id="story-image" src="" alt="Cảnh truyện"/>
+            <div id="dialogue-box" class="hidden">
+                <p id="dialogue-npc-name"></p>
+                <p id="dialogue-text"></p>
+                <button id="dialogue-next-btn">Tiếp theo</button>
+            </div>
+            <button id="story-next-image-btn" class="next-btn-overlay">Tiếp theo &gt;</button>
         </div>
 
         <div id="game-over-screen" style="display: none;">
-            <h2>Game Over!</h2>
+            <h2>Thua Rồi!</h2>
             <p>Điểm của bạn: <span id="final-score">0</span></p>
-            <button id="retry-btn">Chơi Lại Màn</button>
-            <button id="back-to-map-btn-gameover">Về Bản Đồ</button>
+            <button id="retry-btn">Chơi Lại</button>
         </div>
-
+        
         <div id="level-complete-screen" style="display: none;">
-            <h2>Hoàn Thành Màn!</h2>
-            <p>Điểm số: <span id="level-score">0</span></p>
-            <p>Sao đạt được: <span id="stars-earned">0</span></p>
-            <button id="next-level-btn">Tiếp Tục</button>
+            <h2>Hoàn Thành!</h2>
+            <p>Bạn đã giúp Anh Cáo tiến một bước gần hơn đến Sóc Yêu!</p>
+            <button id="view-keepsake-btn">Xem Kỷ Vật</button>
+            <button id="next-level-btn">Về Bản Đồ</button>
         </div>
 
+        <div id="letter-screen" style="display: none;">
+            <h3 id="letter-title"></h3>
+            <img id="letter-image" src="" alt="Kỷ vật" style="display: none;"/>
+            <p id="letter-text"></p>
+            <button id="close-letter-btn">Đóng</button>
+        </div>
     </div>
 
-    <script src="game.js"></script> </body>
+    <script type="module" src="js/main.js"></script>
+    
+</body>
 </html>
