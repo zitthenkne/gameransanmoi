@@ -1,3 +1,5 @@
+// js/game.js
+
 import { allAudio, stopAllSounds } from './audio.js';
 import { LEVELS } from './constants.js';
 import { state } from './state.js';
@@ -8,9 +10,7 @@ let gameInterval;
 let dx = 1, dy = 0;
 let changingDirection = false;
 
-function isTouchDevice() {
-    return 'ontouchstart' in window || navigator.maxTouchPoints > 0;
-}
+// XÓA BỎ hàm isTouchDevice() ở đây
 
 export function setDirection(keyPressed) {
     if (changingDirection) return;
@@ -33,12 +33,7 @@ export function startGame() {
         hidePopup('world-map-screen');
         showScreen('game-area');
 
-        const mobileControls = document.getElementById('mobile-controls');
-        if (isTouchDevice()) {
-            mobileControls.classList.remove('hidden');
-        } else {
-            mobileControls.classList.add('hidden');
-        }
+        // XÓA BỎ đoạn mã kiểm tra và hiển thị nút điều khiển ở đây
 
         initializeLevelGameplay(levelIndex);
     });

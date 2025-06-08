@@ -222,9 +222,10 @@ button:hover {
     background-color: #5cb85c;
 }
 
+/* --- Kiểu cho khu vực chứa nút điều khiển trên di động --- */
 #mobile-controls {
+    display: none; /* Mặc định sẽ ẩn trên màn hình lớn (máy tính) */
     padding-top: 15px; 
-    display: flex;
     flex-direction: column;
     align-items: center;
     gap: 5px;
@@ -251,12 +252,19 @@ button:hover {
     gap: 80px;
 }
 
-@media (max-width: 600px) {
+/* --- Media Query để hiển thị nút trên màn hình nhỏ --- */
+@media (max-width: 850px) {
     h1 { font-size: 1.5em; }
     h2 { font-size: 1.2em; }
     button { padding: 10px 15px; font-size: 1em; }
+    
     #game-over-screen, #level-complete-screen, #letter-screen, #world-map-screen {
         padding: 20px;
         width: 95%;
+    }
+    
+    /* Chỉ hiển thị nút điều khiển trên màn hình nhỏ (điện thoại, máy tính bảng) */
+    #mobile-controls {
+        display: flex; 
     }
 }
