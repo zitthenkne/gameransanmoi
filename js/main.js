@@ -1,6 +1,9 @@
+// js/main.js (Phiên bản sửa lỗi cuối cùng)
+
 import { STORY_DATA, LEVELS } from './constants.js';
 import { setDirection, startGame } from './game.js';
-import { hideAllScreens, showMainView, showWorldMap, advanceImage, advanceDialogue, showLetter, showPopup } from './ui.js';
+// Dòng import dưới đây đã được sửa lại để bao gồm showStoryScene
+import { hideAllScreens, showMainView, showWorldMap, advanceImage, advanceDialogue, showLetter, showPopup, showStoryScene } from './ui.js';
 import { preloadAssets } from './loader.js';
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -47,6 +50,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
         newGameBtn.addEventListener('click', () => {
             localStorage.clear();
+            // Bây giờ hàm này đã được định nghĩa và sẽ chạy được
             showStoryScene('gameIntro', () => showWorldMap());
         });
 
