@@ -1,4 +1,5 @@
-// js/main.js
+// js/main.js (Cập nhật cuối cùng)
+
 import { STORY_DATA, LEVELS } from './constants.js';
 import { setDirection, startGame } from './game.js';
 import { hideAllScreens, showScreen, showWorldMap, advanceImage, advanceDialogue, showLetter, showPopup, hidePopup, showStoryScene } from './ui.js';
@@ -6,13 +7,21 @@ import { preloadAssets } from './loader.js';
 
 document.addEventListener('DOMContentLoaded', function() {
     
+    // KHÔI PHỤC: Thêm tài nguyên mới vào danh sách tải
     const assetsToLoad = {
         foxHead: 'assets/fox_head.png',
         foxBody: 'assets/fox_body.png',
         foxTailTip: 'assets/fox_tail_tip.png',
         loveTrace: 'assets/love_trace.png',
         hedgehog: 'assets/hedgehog.png',
-        obstacle_tree: 'assets/obstacle.png'
+        // Chướng ngại vật
+        obstacle_tree: 'assets/goc_cay.png',
+        obstacle_rock: 'assets/suoi_da.png',
+        obstacle_bamboo: 'assets/than_tre.png',
+        obstacle_crystal: 'assets/pha_le.png',
+        // Vật phẩm
+        shield_powerup: 'assets/shield_powerup.png',
+        slowmo_powerup: 'assets/slowmo_powerup.png'
     };
 
     let imageCounter = 0;
