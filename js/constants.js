@@ -1,7 +1,4 @@
-// js/constants.js
-
 export const STORY_DATA = {
-    // ... (nội dung không đổi)
     gameIntro: {
         images: ['assets/story/intro_1.png', 'assets/story/intro_2.png', 'assets/story/intro_3.png'],
     },
@@ -63,14 +60,11 @@ export const LEVELS = [
         winScore: 50,
         startPos: { x: 10, y: 10 },
         obstacleImageKey: "obstacle_tree", 
+        backgroundImageKey: "bg_level_1",
         obstacles: [ {x: 3, y: 3}, {x: 3, y: 4}, {x: 16, y: 11}, {x: 10, y: 2}, {x: 12, y: 8} ],
         hedgehogs: [ { x: 2, y: 8, dx: 0, dy: 1, range: 4, moved: 0 }, { x: 13, y: 4, dx: 1, dy: 0, range: 5, moved: 0 } ],
-        powerups: [
-            { x: 15, y: 2, type: 'shield' },
-            { x: 5, y: 12, type: 'slowmo' }
-        ],
+        powerups: [ { x: 15, y: 2, type: 'shield' }, { x: 5, y: 12, type: 'slowmo' } ],
         keepsake: {
-            // THÊM VÀO: Khóa để tham chiếu đến hình ảnh kỷ vật
             imageKey: "keepsake_1_item",
             title: "Đi off clb tại Vũng Tàu",
             text: "Hôm đó là một ngày rất đáng nhớ, tui quài hỏng có quên hôm đó tui tỉnh tò nhà mik mà nhà mik lại từ chúi, bùn quớ lun á.",
@@ -81,11 +75,10 @@ export const LEVELS = [
         level: 2, winScore: 70,
         startPos: { x: 5, y: 7 },
         obstacleImageKey: "obstacle_rock",
+        backgroundImageKey: "bg_level_2",
         obstacles: [ {x: 9, y: 4}, {x: 10, y: 4}, {x: 11, y: 4}, {x: 9, y: 10}, {x: 10, y: 10}, {x: 11, y: 10} ],
         hedgehogs: [ { x: 1, y: 1, dx: 1, dy: 0, range: 17, moved: 0 }, { x: 18, y: 13, dx: -1, dy: 0, range: 17, moved: 0 } ],
-        powerups: [
-            { x: 1, y: 7, type: 'shield' }
-        ],
+        powerups: [ { x: 1, y: 7, type: 'shield' } ],
         keepsake: {
             imageKey: "keepsake_2_item",
             title: "Ly Sinh Tố Mát Lạnh",
@@ -97,11 +90,10 @@ export const LEVELS = [
         level: 3, winScore: 80,
         startPos: { x: 7, y: 3 },
         obstacleImageKey: "obstacle_bamboo",
+        backgroundImageKey: "bg_level_3",
         obstacles: [ {x: 4, y: 0}, {x: 4, y: 1}, {x: 4, y: 2}, {x: 4, y: 3}, {x: 4, y: 4}, {x: 4, y: 5}, {x: 15, y: 9}, {x: 15, y: 10}, {x: 15, y: 11}, {x: 15, y: 12}, {x: 15, y: 13}, {x: 15, y: 14}, {x: 8, y: 7}, {x: 9, y: 7}, {x: 10, y: 7}, {x: 11, y: 7} ],
         hedgehogs: [ { x: 1, y: 1, dx: 1, dy: 0, range: 3, moved: 0 }, { x: 15, y: 12, dx: 0, dy: -1, range: 3, moved: 0 }],
-        powerups: [
-            { x: 10, y: 10, type: 'slowmo' }
-        ],
+        powerups: [ { x: 10, y: 10, type: 'slowmo' } ],
         keepsake: {
             imageKey: "keepsake_3_item",
             title: "Đêm hội trăng rằm",
@@ -113,12 +105,10 @@ export const LEVELS = [
         level: 4, winScore: 100,
         startPos: { x: 10, y: 10 },
         obstacleImageKey: "obstacle_crystal",
+        backgroundImageKey: "bg_level_4",
         obstacles: [ {x: 3, y: 11}, {x: 4, y: 10}, {x: 5, y: 9}, {x: 6, y: 8}, {x: 13, y: 6}, {x: 14, y: 5}, {x: 15, y: 4}, {x: 16, y: 3} ],
         hedgehogs: [ { x: 1, y: 1, dx: 1, dy: 1, range: 5, moved: 0 }, { x: 18, y: 1, dx: -1, dy: 1, range: 5, moved: 0 } ],
-        powerups: [
-            { x: 1, y: 13, type: 'shield' },
-            { x: 18, y: 13, type: 'slowmo' }
-        ],
+        powerups: [ { x: 1, y: 13, type: 'shield' }, { x: 18, y: 13, type: 'slowmo' } ],
         keepsake: {
             imageKey: "keepsake_4_item",
             title: "Đồng Đội Chơi Game",
@@ -129,6 +119,8 @@ export const LEVELS = [
     {
         level: 5, winScore: 120,
         startPos: { x: 10, y: 10 },
+        obstacleImageKey: null, // Màn 5 không có chướng ngại vật tĩnh
+        backgroundImageKey: "bg_level_5",
         obstacles: [],
         hedgehogs: [ { x: 1, y: 1, dx: 1, dy: 0, range: 17, moved: 0 }, { x: 18, y: 3, dx: -1, dy: 0, range: 17, moved: 0 }, { x: 1, y: 5, dx: 1, dy: 0, range: 17, moved: 0 }, { x: 18, y: 7, dx: -1, dy: 0, range: 17, moved: 0 }, { x: 1, y: 9, dx: 1, dy: 0, range: 17, moved: 0 }, { x: 18, y: 11, dx: -1, dy: 0, range: 17, moved: 0 } ],
         powerups: [],

@@ -1,5 +1,3 @@
-// js/game.js (Khôi phục lại Nhím)
-
 import { allAudio, stopAllSounds } from './audio.js';
 import { LEVELS } from './constants.js';
 import { state } from './state.js';
@@ -174,12 +172,13 @@ function initializeLevelGameplay(levelIndex) {
 
     function drawObstacles() {
         const obsImgKey = levelData.obstacleImageKey;
-        const obsImg = images[obsImgKey];
-        if (!obsImg || !obstacles) return;
-        obstacles.forEach(obs => drawPart(obsImg, obs));
+        if (obsImgKey) {
+            const obsImg = images[obsImgKey];
+            if (!obsImg || !obstacles) return;
+            obstacles.forEach(obs => drawPart(obsImg, obs));
+        }
     }
 
-    // KHÔI PHỤC LẠI: Hàm vẽ nhím
     function drawHedgehogs() {
         const hedgehogImg = images.hedgehog;
         if (!hedgehogImg || !hedgehogs) return;
@@ -193,7 +192,6 @@ function initializeLevelGameplay(levelIndex) {
         }
     }
 
-    // KHÔI PHỤC LẠI: Hàm di chuyển nhím
     function updateHedgehogs() {
         if (!hedgehogs) return;
         hedgehogMoveCounter++;
@@ -243,7 +241,7 @@ function initializeLevelGameplay(levelIndex) {
 
     function gameLoop() {
         changingDirection = false;
-        updateHedgehogs(); // Đảm bảo hàm này được gọi
+        updateHedgehogs();
         const head = {x: fox.body[0].x + dx, y: fox.body[0].y + dy};
         
         if (isGameOver(head)) {
@@ -294,10 +292,17 @@ function initializeLevelGameplay(levelIndex) {
             fox.body.pop();
         }
         
-        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        const bgKey = levelData.backgroundImageKey;
+        const backgroundImg = images[bgKey];
+        if (backgroundImg) {
+            ctx.drawImage(backgroundImg, 0, 0, canvas.width, canvas.height);
+        } else {
+            ctx.clearRect(0, 0, canvas.width, canvas.height);
+        }
+        
         drawObstacles(); 
         drawLoveTraceItem(); 
-        drawHedgehogs(); // Đảm bảo hàm này được gọi
+        drawHedgehogs();
         drawPowerups();
         drawKeepsake();
         drawFox();
