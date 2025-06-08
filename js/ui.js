@@ -1,15 +1,15 @@
+// js/ui.js (Đã sửa lỗi)
+
 import { STORY_DATA, LEVELS } from './constants.js';
 import { startGame } from './game.js';
-import { state } from './main.js';
+import { state } from './state.js'; // <-- THAY ĐỔI DÒNG NÀY
 
-// Các biến cục bộ cho màn hình câu chuyện
 let storyImages = [];
 let storyNpc = null;
 let storyImageIndex = 0;
 let storyDialogueIndex = 0;
 let onStoryComplete = null;
 
-// --- CÁC HÀM QUẢN LÝ GIAO DIỆN (UI) ---
 const MAIN_VIEWS = ['main-menu', 'game-area'];
 const ALL_POPUPS = ['world-map-screen', 'game-over-screen', 'level-complete-screen', 'letter-screen', 'story-screen'];
 
@@ -41,7 +41,6 @@ export function hidePopup(popupId) {
     if (popupElement) popupElement.style.display = 'none';
 }
 
-// --- LOGIC MÀN HÌNH CÂU CHUYỆN ---
 function endStoryScene() {
     hidePopup('story-screen');
     if (onStoryComplete) {
@@ -98,7 +97,6 @@ export function showStoryScene(storyKey, onCompleteCallback) {
     advanceImage();
 }
 
-// --- CÁC HÀM UI KHÁC ---
 export function showWorldMap() {
     const container = document.getElementById('level-selection-container');
     container.innerHTML = '';

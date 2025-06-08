@@ -1,11 +1,9 @@
+// js/main.js (Đã sửa lỗi)
+
 import { STORY_DATA, LEVELS } from './constants.js';
 import { setDirection, startGame } from './game.js';
-import { hideAllScreens, showMainView, showWorldMap, advanceImage, advanceDialogue, hidePopup, showLetter } from './ui.js';
-
-// Nơi lưu trữ trạng thái chung của game
-export const state = {
-    currentLevelIndex: 0
-};
+import { hideAllScreens, showMainView, showWorldMap, advanceImage, advanceDialogue, showLetter } from './ui.js';
+import { state } from './state.js'; // <-- THÊM DÒNG NÀY
 
 // Nơi lưu trữ tất cả hình ảnh đã tải
 export const images = {};
@@ -32,15 +30,14 @@ function preloadAssets(assets, onReady) {
         };
         img.onerror = () => {
             console.error(`Lỗi không tải được hình ảnh: ${assets[key]}`);
-            loadCounter--; // Vẫn tiếp tục dù lỗi để không bị kẹt mãi mãi
-             if (newGameBtn) newGameBtn.textContent = `Đang tải... (${totalAssets - loadCounter}/${totalAssets})`;
+            loadCounter--;
+            if (newGameBtn) newGameBtn.textContent = `Đang tải... (${totalAssets - loadCounter}/${totalAssets})`;
             if (loadCounter === 0) onReady();
         };
         img.src = assets[key];
     });
 }
 
-// --- GÁN SỰ KIỆN - CHẠY KHI TRANG TẢI XONG ---
 document.addEventListener('DOMContentLoaded', function() {
     
     const assetsToLoad = {
@@ -75,7 +72,6 @@ document.addEventListener('DOMContentLoaded', function() {
         newGameBtn.disabled = false;
         newGameBtn.textContent = "Bắt Đầu Hành Trình";
 
-        // Gán sự kiện
         document.addEventListener('keydown', (event) => setDirection(event.key));
         document.getElementById('ctrl-up').addEventListener('click', () => setDirection('ArrowUp'));
         document.getElementById('ctrl-down').addEventListener('click', () => setDirection('ArrowDown'));
