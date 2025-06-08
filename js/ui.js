@@ -1,8 +1,6 @@
-// js/ui.js (Đã sửa lỗi)
-
 import { STORY_DATA, LEVELS } from './constants.js';
 import { startGame } from './game.js';
-import { state } from './state.js'; // <-- THAY ĐỔI DÒNG NÀY
+import { state } from './state.js';
 
 let storyImages = [];
 let storyNpc = null;
@@ -19,7 +17,6 @@ export function hideAllScreens() {
         if (el) el.style.display = 'none';
     });
 }
-
 export function showMainView(viewIdToShow) {
     MAIN_VIEWS.forEach(id => {
         const el = document.getElementById(id);
@@ -30,24 +27,20 @@ export function showMainView(viewIdToShow) {
         if (viewElement) viewElement.style.display = 'block';
     }
 }
-
 export function showPopup(popupId) {
     const popupElement = document.getElementById(popupId);
     if (popupElement) popupElement.style.display = 'flex';
 }
-
 export function hidePopup(popupId) {
     const popupElement = document.getElementById(popupId);
     if (popupElement) popupElement.style.display = 'none';
 }
-
 function endStoryScene() {
     hidePopup('story-screen');
     if (onStoryComplete) {
         onStoryComplete();
     }
 }
-
 export function advanceDialogue() {
     const dialogueName = document.getElementById('dialogue-npc-name');
     const dialogueText = document.getElementById('dialogue-text');
@@ -60,7 +53,6 @@ export function advanceDialogue() {
         endStoryScene();
     }
 }
-
 export function advanceImage() {
     const storyImageEl = document.getElementById('story-image');
     const dialogueBox = document.getElementById('dialogue-box');
@@ -81,7 +73,6 @@ export function advanceImage() {
         }
     }
 }
-
 export function showStoryScene(storyKey, onCompleteCallback) {
     const storyData = STORY_DATA[storyKey];
     if (!storyData) {
@@ -96,7 +87,6 @@ export function showStoryScene(storyKey, onCompleteCallback) {
     showPopup('story-screen');
     advanceImage();
 }
-
 export function showWorldMap() {
     const container = document.getElementById('level-selection-container');
     container.innerHTML = '';
@@ -119,7 +109,6 @@ export function showWorldMap() {
     showMainView(null);
     showPopup('world-map-screen');
 }
-
 export function showLetter() {
     const keepsakeData = LEVELS[state.currentLevelIndex].keepsake;
     document.getElementById('letter-title').textContent = keepsakeData.title;

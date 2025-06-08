@@ -1,9 +1,7 @@
-// js/game.js (Đã sửa lỗi lần 2)
-
 import { allAudio, stopAllSounds } from './audio.js';
 import { LEVELS } from './constants.js';
 import { state } from './state.js';
-import { images } from './loader.js'; // <-- THAY ĐỔI Ở ĐÂY
+import { images } from './loader.js';
 import { showPopup, showStoryScene, showMainView } from './ui.js';
 
 let gameInterval;
@@ -22,7 +20,6 @@ export function setDirection(keyPressed) {
     if ((keyPressed === 'ArrowUp' || keyPressed === 'w') && !goingDown) { dx = 0; dy = -1; }
     if ((keyPressed === 'ArrowDown' || keyPressed === 's') && !goingUp) { dx = 0; dy = 1; }
 }
-
 export function startGame() {
     const levelIndex = state.currentLevelIndex;
     const storyKey = `level_${levelIndex + 1}`;
@@ -31,7 +28,6 @@ export function startGame() {
         initializeLevelGameplay(levelIndex);
     });
 }
-
 function initializeLevelGameplay(levelIndex) {
     dx = 1; dy = 0;
     stopAllSounds();
@@ -74,7 +70,6 @@ function initializeLevelGameplay(levelIndex) {
             showPopup('level-complete-screen');
         }
     }
-
     function createLoveTrace() {
         const gridWidth = canvas.width / gridSize;
         const gridHeight = canvas.height / gridSize;
@@ -86,7 +81,6 @@ function initializeLevelGameplay(levelIndex) {
                             (obstacles || []).some(obs => obs.x === loveTrace.x && obs.y === loveTrace.y);
         } while (isOverlapping);
     }
-    
     function drawPart(image, part, rotation = 0) {
         if (!image || !image.complete || image.naturalHeight === 0) return;
         ctx.save();
@@ -95,14 +89,12 @@ function initializeLevelGameplay(levelIndex) {
         ctx.drawImage(image, -gridSize / 2, -gridSize / 2, gridSize, gridSize);
         ctx.restore();
     }
-    
     function getRotation(fromPart, toPart) {
         if (toPart.x > fromPart.x) return Math.PI / 2;
         if (toPart.x < fromPart.x) return -Math.PI / 2;
         if (toPart.y > fromPart.y) return Math.PI;
         return 0;
     }
-    
     function drawFox() {
         const foxHeadImg = images.foxHead;
         const foxBodyImg = images.foxBody;
@@ -120,26 +112,22 @@ function initializeLevelGameplay(levelIndex) {
             drawPart(imageToDraw, part, rotation);
         }
     }
-
     function drawObstacles() {
         const obsImgKey = levelData.obstacleImageKey || 'obstacle_tree';
         const obsImg = images[obsImgKey];
         if (!obsImg || !obstacles) return;
         obstacles.forEach(obs => drawPart(obsImg, obs));
     }
-
     function drawHedgehogs() {
         const hedgehogImg = images.hedgehog;
         if (!hedgehogImg || !hedgehogs) return;
         hedgehogs.forEach(h => drawPart(hedgehogImg, h));
     }
-    
     function drawLoveTraceItem() {
         if(images.loveTrace && loveTrace.x !== undefined) {
             drawPart(images.loveTrace, loveTrace);
         }
     }
-
     function updateHedgehogs() {
         if (!hedgehogs) return;
         hedgehogMoveCounter++;
@@ -153,7 +141,6 @@ function initializeLevelGameplay(levelIndex) {
             }
         });
     }
-
     function isGameOver(head) {
         const gridWidth = canvas.width / gridSize;
         const gridHeight = canvas.height / gridSize;
@@ -163,7 +150,6 @@ function initializeLevelGameplay(levelIndex) {
         if ((hedgehogs || []).some(h => h.x === head.x && h.y === head.y)) return true;
         return false;
     }
-    
     function gameLoop() {
         changingDirection = false;
         updateHedgehogs();

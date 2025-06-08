@@ -1,12 +1,7 @@
-// js/main.js (Đã sửa lỗi lần 2)
-
 import { STORY_DATA, LEVELS } from './constants.js';
 import { setDirection, startGame } from './game.js';
 import { hideAllScreens, showMainView, showWorldMap, advanceImage, advanceDialogue, showLetter, showPopup } from './ui.js';
-import { state } from './state.js';
-import { preloadAssets } from './loader.js'; // <-- THAY ĐỔI Ở ĐÂY
-
-// Hàm preloadAssets và biến images đã được chuyển sang loader.js
+import { preloadAssets } from './loader.js';
 
 document.addEventListener('DOMContentLoaded', function() {
     
