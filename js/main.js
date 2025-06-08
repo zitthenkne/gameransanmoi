@@ -1,42 +1,12 @@
-// js/main.js (Đã sửa lỗi)
+// js/main.js (Đã sửa lỗi lần 2)
 
 import { STORY_DATA, LEVELS } from './constants.js';
 import { setDirection, startGame } from './game.js';
-import { hideAllScreens, showMainView, showWorldMap, advanceImage, advanceDialogue, showLetter } from './ui.js';
-import { state } from './state.js'; // <-- THÊM DÒNG NÀY
+import { hideAllScreens, showMainView, showWorldMap, advanceImage, advanceDialogue, showLetter, showPopup } from './ui.js';
+import { state } from './state.js';
+import { preloadAssets } from './loader.js'; // <-- THAY ĐỔI Ở ĐÂY
 
-// Nơi lưu trữ tất cả hình ảnh đã tải
-export const images = {};
-
-function preloadAssets(assets, onReady) {
-    const assetKeys = Object.keys(assets);
-    let loadCounter = assetKeys.length;
-    const totalAssets = assetKeys.length;
-
-    if (loadCounter === 0) {
-        onReady();
-        return;
-    }
-
-    const newGameBtn = document.getElementById('new-game-btn');
-
-    assetKeys.forEach(key => {
-        const img = new Image();
-        img.onload = () => {
-            loadCounter--;
-            images[key] = img;
-            if (newGameBtn) newGameBtn.textContent = `Đang tải... (${totalAssets - loadCounter}/${totalAssets})`;
-            if (loadCounter === 0) onReady();
-        };
-        img.onerror = () => {
-            console.error(`Lỗi không tải được hình ảnh: ${assets[key]}`);
-            loadCounter--;
-            if (newGameBtn) newGameBtn.textContent = `Đang tải... (${totalAssets - loadCounter}/${totalAssets})`;
-            if (loadCounter === 0) onReady();
-        };
-        img.src = assets[key];
-    });
-}
+// Hàm preloadAssets và biến images đã được chuyển sang loader.js
 
 document.addEventListener('DOMContentLoaded', function() {
     

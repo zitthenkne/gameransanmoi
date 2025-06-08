@@ -1,13 +1,15 @@
+// js/game.js (Đã sửa lỗi lần 2)
+
 import { allAudio, stopAllSounds } from './audio.js';
 import { LEVELS } from './constants.js';
-import { state, images } from './main.js';
+import { state } from './state.js';
+import { images } from './loader.js'; // <-- THAY ĐỔI Ở ĐÂY
 import { showPopup, showStoryScene, showMainView } from './ui.js';
 
 let gameInterval;
 let dx = 1, dy = 0;
 let changingDirection = false;
 
-// --- LOGIC ĐIỀU KHIỂN GAME CHÍNH ---
 export function setDirection(keyPressed) {
     if (changingDirection) return;
     changingDirection = true;
@@ -30,7 +32,6 @@ export function startGame() {
     });
 }
 
-// --- LOGIC CỐT LÕI CỦA MÀN CHƠI (GAMEPLAY) ---
 function initializeLevelGameplay(levelIndex) {
     dx = 1; dy = 0;
     stopAllSounds();
