@@ -101,7 +101,7 @@ button:hover {
 #letter-screen { border-color: #5bc0de; }
 #world-map-screen { border-color: #337ab7; }
 
-/* --- THÊM VÀO: Canh chỉnh cho màn hình kỷ vật --- */
+/* --- Canh chỉnh cho màn hình kỷ vật --- */
 #letter-text {
     margin-top: 10px;
     font-size: 1.1em;
@@ -116,7 +116,7 @@ button:hover {
     object-fit: contain;
     border: 3px solid #e0cda8;
 }
-.letter-buttons {
+.letter-buttons, .level-complete-buttons {
     display: flex;
     justify-content: center;
     margin-top: 15px;
@@ -228,6 +228,7 @@ button:hover {
     flex-direction: column;
     align-items: center;
     gap: 5px;
+    margin-top: 10px;
 }
 
 .d-pad-btn {
@@ -241,6 +242,8 @@ button:hover {
     border: 2px solid rgba(255, 255, 255, 0.5);
     color: white;
     line-height: 60px;
+    user-select: none;
+    -webkit-user-select: none;
 }
 
 .middle-controls {

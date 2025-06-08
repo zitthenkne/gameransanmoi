@@ -8,6 +8,10 @@ let gameInterval;
 let dx = 1, dy = 0;
 let changingDirection = false;
 
+function isTouchDevice() {
+    return 'ontouchstart' in window || navigator.maxTouchPoints > 0;
+}
+
 export function setDirection(keyPressed) {
     if (changingDirection) return;
     changingDirection = true;
@@ -28,6 +32,14 @@ export function startGame() {
     showStoryScene(storyKey, () => {
         hidePopup('world-map-screen');
         showScreen('game-area');
+
+        const mobileControls = document.getElementById('mobile-controls');
+        if (isTouchDevice()) {
+            mobileControls.classList.remove('hidden');
+        } else {
+            mobileControls.classList.add('hidden');
+        }
+
         initializeLevelGameplay(levelIndex);
     });
 }

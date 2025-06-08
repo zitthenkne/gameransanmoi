@@ -55,13 +55,11 @@ document.addEventListener('DOMContentLoaded', function() {
 
         // Gán sự kiện cho các nút điều khiển game
         document.addEventListener('keydown', (event) => setDirection(event.key));
-        const mobileControls = document.getElementById('mobile-controls');
-        if (mobileControls) {
-             document.getElementById('ctrl-up').addEventListener('click', () => setDirection('ArrowUp'));
-             document.getElementById('ctrl-down').addEventListener('click', () => setDirection('ArrowDown'));
-             document.getElementById('ctrl-left').addEventListener('click', () => setDirection('ArrowLeft'));
-             document.getElementById('ctrl-right').addEventListener('click', () => setDirection('ArrowRight'));
-        }
+        document.getElementById('ctrl-up').addEventListener('click', () => setDirection('ArrowUp'));
+        document.getElementById('ctrl-down').addEventListener('click', () => setDirection('ArrowDown'));
+        document.getElementById('ctrl-left').addEventListener('click', () => setDirection('ArrowLeft'));
+        document.getElementById('ctrl-right').addEventListener('click', () => setDirection('ArrowRight'));
+        
 
         // Gán sự kiện cho các nút trên màn hình câu chuyện
         document.getElementById('story-next-image-btn').addEventListener('click', advanceImage);
