@@ -1,5 +1,9 @@
+// js/loader.js
+
+// Nơi lưu trữ tất cả hình ảnh đã tải, có thể truy cập từ mọi nơi
 export const images = {};
 
+// Hàm chuyên để tải tài nguyên
 export function preloadAssets(assets, onReady) {
     const assetKeys = Object.keys(assets);
     let loadCounter = assetKeys.length;
@@ -16,7 +20,7 @@ export function preloadAssets(assets, onReady) {
         const img = new Image();
         img.onload = () => {
             loadCounter--;
-            images[key] = img;
+            images[key] = img; // Lưu vào biến images được export
             if (newGameBtn) newGameBtn.textContent = `Đang tải... (${totalAssets - loadCounter}/${totalAssets})`;
             if (loadCounter === 0) onReady();
         };

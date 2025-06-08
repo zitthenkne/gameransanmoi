@@ -1,3 +1,5 @@
+// js/ui.js
+
 import { STORY_DATA, LEVELS } from './constants.js';
 import { startGame } from './game.js';
 import { state } from './state.js';
@@ -8,39 +10,52 @@ let storyImageIndex = 0;
 let storyDialogueIndex = 0;
 let onStoryComplete = null;
 
-const MAIN_VIEWS = ['main-menu', 'game-area'];
-const ALL_POPUPS = ['world-map-screen', 'game-over-screen', 'level-complete-screen', 'letter-screen', 'story-screen'];
+const ALL_SCREENS = ['main-menu', 'game-area', 'world-map-screen', 'game-over-screen', 'level-complete-screen', 'letter-screen', 'story-screen'];
 
 export function hideAllScreens() {
-    [...MAIN_VIEWS, ...ALL_POPUPS].forEach(id => {
+    ALL_SCREENS.forEach(id => {
         const el = document.getElementById(id);
-        if (el) el.style.display = 'none';
+        if (el && !el.classList.contains('hidden')) {
+             el.classList.add('hidden');
+        }
     });
 }
-export function showMainView(viewIdToShow) {
-    MAIN_VIEWS.forEach(id => {
-        const el = document.getElementById(id);
-        if (el) el.style.display = 'none';
+
+export function showScreen(screenId) {
+    // Ẩn tất cả các màn hình chính khác trước
+    ALL_SCREENS.forEach(id => {
+        if (id !== screenId) {
+             const el = document.getElementById(id);
+             if (el && !el.classList.contains('hidden')) {
+                  el.classList.add('hidden');
+             }
+        }
     });
-    if (viewIdToShow) {
-        const viewElement = document.getElementById(viewIdToShow);
-        if (viewElement) viewElement.style.display = 'block';
+    // Hiện màn hình được yêu cầu
+    const screenElement = document.getElementById(screenId);
+    if (screenElement) {
+        screenElement.classList.remove('hidden');
     }
 }
+
+// Hàm showPopup và hidePopup để hiện/ẩn các pop-up nhỏ mà không ẩn toàn bộ màn hình game
 export function showPopup(popupId) {
     const popupElement = document.getElementById(popupId);
-    if (popupElement) popupElement.style.display = 'flex';
+    if (popupElement) popupElement.classList.remove('hidden');
 }
+
 export function hidePopup(popupId) {
     const popupElement = document.getElementById(popupId);
-    if (popupElement) popupElement.style.display = 'none';
+    if (popupElement) popupElement.classList.add('hidden');
 }
+
 function endStoryScene() {
     hidePopup('story-screen');
     if (onStoryComplete) {
         onStoryComplete();
     }
 }
+
 export function advanceDialogue() {
     const dialogueName = document.getElementById('dialogue-npc-name');
     const dialogueText = document.getElementById('dialogue-text');
@@ -53,6 +68,7 @@ export function advanceDialogue() {
         endStoryScene();
     }
 }
+
 export function advanceImage() {
     const storyImageEl = document.getElementById('story-image');
     const dialogueBox = document.getElementById('dialogue-box');
@@ -73,6 +89,7 @@ export function advanceImage() {
         }
     }
 }
+
 export function showStoryScene(storyKey, onCompleteCallback) {
     const storyData = STORY_DATA[storyKey];
     if (!storyData) {
@@ -84,9 +101,10 @@ export function showStoryScene(storyKey, onCompleteCallback) {
     storyImageIndex = 0;
     storyDialogueIndex = 0;
     onStoryComplete = onCompleteCallback;
-    showPopup('story-screen');
+    showScreen('story-screen');
     advanceImage();
 }
+
 export function showWorldMap() {
     const container = document.getElementById('level-selection-container');
     container.innerHTML = '';
@@ -97,7 +115,6 @@ export function showWorldMap() {
         const isUnlocked = (index === 0) || localStorage.getItem(`level_unlocked_${index + 1}`);
         if (isUnlocked) {
             button.addEventListener('click', () => {
-                hidePopup('world-map-screen');
                 state.currentLevelIndex = index;
                 startGame();
             });
@@ -106,9 +123,9 @@ export function showWorldMap() {
         }
         container.appendChild(button);
     });
-    showMainView(null);
-    showPopup('world-map-screen');
+    showScreen('world-map-screen');
 }
+
 export function showLetter() {
     const keepsakeData = LEVELS[state.currentLevelIndex].keepsake;
     document.getElementById('letter-title').textContent = keepsakeData.title;
@@ -116,9 +133,9 @@ export function showLetter() {
     const letterImage = document.getElementById('letter-image');
     if (keepsakeData.image) {
         letterImage.src = keepsakeData.image;
-        letterImage.style.display = 'block';
+        letterImage.classList.remove('hidden');
     } else {
-        letterImage.style.display = 'none';
+        letterImage.classList.add('hidden');
     }
     showPopup('letter-screen');
 }

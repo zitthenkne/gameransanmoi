@@ -16,13 +16,13 @@
             <button id="new-game-btn">Bắt Đầu Hành Trình</button>
         </div>
 
-        <div id="world-map-screen" style="display: none;">
+        <div id="world-map-screen" class="hidden">
             <h2>Bản Đồ Hành Trình</h2>
             <div id="level-selection-container"></div>
             <button id="map-back-to-menu-btn">Về Menu Chính</button>
         </div>
         
-        <div id="game-area" style="display: none;">
+        <div id="game-area" class="hidden">
             <div id="hud"><span>Điểm: </span><span id="score">0</span></div>
             <canvas id="game-canvas" width="800" height="600"></canvas>
             <div id="mobile-controls" class="hidden">
@@ -45,22 +45,22 @@
             <button id="story-next-image-btn" class="next-btn-overlay">Tiếp theo &gt;</button>
         </div>
 
-        <div id="game-over-screen" style="display: none;">
+        <div id="game-over-screen" class="hidden">
             <h2>Thua Rồi!</h2>
             <p>Điểm của bạn: <span id="final-score">0</span></p>
             <button id="retry-btn">Chơi Lại</button>
         </div>
         
-        <div id="level-complete-screen" style="display: none;">
+        <div id="level-complete-screen" class="hidden">
             <h2>Hoàn Thành!</h2>
             <p>Bạn đã giúp Anh Cáo tiến một bước gần hơn đến Sóc Yêu!</p>
             <button id="view-keepsake-btn">Xem Kỷ Vật</button>
             <button id="next-level-btn">Về Bản Đồ</button>
         </div>
 
-        <div id="letter-screen" style="display: none;">
+        <div id="letter-screen" class="hidden">
             <h3 id="letter-title"></h3>
-            <img id="letter-image" src="" alt="Kỷ vật" style="display: none;"/>
+            <img id="letter-image" src="" alt="Kỷ vật" class="hidden"/>
             <p id="letter-text"></p>
             <button id="close-letter-btn">Đóng</button>
         </div>
