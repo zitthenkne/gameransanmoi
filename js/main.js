@@ -1,6 +1,9 @@
+// js/main.js (Phiên bản cuối cùng, đã sửa lỗi import)
+
 import { STORY_DATA, LEVELS } from './constants.js';
 import { setDirection, startGame } from './game.js';
-import { hideAllScreens, showScreen, showWorldMap, advanceImage, advanceDialogue, showLetter, showPopup, hidePopup, showStoryScene } from './ui.js';
+// SỬA LỖI: Xóa "advanceDialogue" và "advanceImage" khỏi danh sách import vì chúng đã được xử lý bên trong ui.js
+import { hideAllScreens, showScreen, showWorldMap, showLetter, showPopup, hidePopup, showStoryScene } from './ui.js';
 import { preloadAssets } from './loader.js';
 
 document.addEventListener('DOMContentLoaded', function() {
@@ -11,15 +14,12 @@ document.addEventListener('DOMContentLoaded', function() {
         foxTailTip: 'assets/fox_tail_tip.png',
         loveTrace: 'assets/love_trace.png',
         hedgehog: 'assets/hedgehog.png',
-        // Chướng ngại vật
         obstacle_tree: 'assets/goc_cay.png',
         obstacle_rock: 'assets/suoi_da.png',
         obstacle_bamboo: 'assets/than_tre.png',
         obstacle_crystal: 'assets/pha_le.png',
-        // Vật phẩm
         shield_powerup: 'assets/shield_powerup.png',
         slowmo_powerup: 'assets/slowmo_powerup.png',
-        // Ảnh nền cho các màn chơi
         bg_level_1: 'assets/background_level_1.png',
         bg_level_2: 'assets/background_level_2.png',
         bg_level_3: 'assets/background_level_3.png',
@@ -29,9 +29,9 @@ document.addEventListener('DOMContentLoaded', function() {
 
     let imageCounter = 0;
     for (const key in STORY_DATA) {
-        if (STORY_DATA[key].images) {
-            STORY_DATA[key].images.forEach(imgPath => {
-                assetsToLoad[`story_img_${imageCounter++}`] = imgPath;
+        if (STORY_DATA[key].scenes) { // Cập nhật để đọc cấu trúc "scenes" mới
+            STORY_DATA[key].scenes.forEach(scene => {
+                assetsToLoad[`story_img_${imageCounter++}`] = scene.image;
             });
         }
     }
@@ -60,10 +60,9 @@ document.addEventListener('DOMContentLoaded', function() {
         document.getElementById('ctrl-left').addEventListener('click', () => setDirection('ArrowLeft'));
         document.getElementById('ctrl-right').addEventListener('click', () => setDirection('ArrowRight'));
         
-
-        // Gán sự kiện cho các nút trên màn hình câu chuyện
-        document.getElementById('story-next-image-btn').addEventListener('click', advanceImage);
-        document.getElementById('dialogue-next-btn').addEventListener('click', advanceDialogue);
+        // SỬA LỖI: Xóa các dòng gán sự kiện cho nút trong story-screen vì ui.js đã tự quản lý
+        // document.getElementById('story-next-image-btn').addEventListener('click', advanceImage);
+        // document.getElementById('dialogue-next-btn').addEventListener('click', advanceDialogue);
 
         // Gán sự kiện cho các nút menu và pop-up khác
         newGameBtn.addEventListener('click', () => {
