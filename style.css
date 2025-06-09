@@ -222,9 +222,31 @@ button:hover {
     background-color: #5cb85c;
 }
 
-/* --- Kiểu cho khu vực chứa nút điều khiển trên di động --- */
+/* --- Kiểu cho hộp dẫn truyện mới --- */
+#narrative-box {
+    position: absolute;
+    bottom: 5%;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 90%;
+    max-width: 800px;
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 10px;
+    padding: 15px 20px;
+    box-shadow: 0 0 15px black;
+}
+
+#narrative-text {
+    color: white;
+    font-size: 1.3em;
+    text-align: center;
+    font-style: italic;
+    margin: 0;
+}
+
+/* --- Kiểu cho nút điều khiển trên di động --- */
 #mobile-controls {
-    display: none; /* Mặc định sẽ ẩn trên màn hình lớn (máy tính) */
+    display: none;
     padding-top: 15px; 
     flex-direction: column;
     align-items: center;
@@ -263,7 +285,6 @@ button:hover {
         width: 95%;
     }
     
-    /* Chỉ hiển thị nút điều khiển trên màn hình nhỏ (điện thoại, máy tính bảng) */
     #mobile-controls {
         display: flex; 
     }

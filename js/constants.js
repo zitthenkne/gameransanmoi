@@ -1,15 +1,14 @@
-// Cấu trúc mới hỗ trợ hội thoại cho từng ảnh
 export const STORY_DATA = {
     gameIntro: {
         scenes: [
-            { image: 'assets/story/intro_1.png' },
-            { image: 'assets/story/intro_2.png' },
-            { image: 'assets/story/intro_3.png' }
+            { image: 'assets/story/intro_1.png', narrativeText: "Tại một khu rừng yên bình, có một Cáo con và một Sóc con..." },
+            { image: 'assets/story/intro_2.png', narrativeText: "Họ là đôi bạn thân, luôn quấn quýt và sẻ chia mọi thứ cùng nhau." },
+            { image: 'assets/story/intro_3.png', narrativeText: "Cho đến một ngày, tên Lửng Mật độc ác xuất hiện và chia cắt đôi bạn..." }
         ]
     },
     level_1: {
         scenes: [
-            { image: 'assets/story/l1_1.png' },
+            { image: 'assets/story/l1_1.png', narrativeText: "Cáo bắt đầu hành trình giải cứu... điểm đến đầu tiên là một khu rừng thông đã bị tàn phá." },
             { 
                 image: 'assets/story/l1_2.png',
                 dialogue: { 
@@ -28,7 +27,7 @@ export const STORY_DATA = {
     },
     level_2: {
         scenes: [
-            { image: 'assets/story/l2_1.png' },
+            { image: 'assets/story/l2_1.png', narrativeText: "Lần theo dấu vết, Cáo đến một bờ suối trong vắt nhưng đầy đá nhọn..." },
             { 
                 image: 'assets/story/l2_2.png',
                 dialogue: { 
@@ -47,7 +46,7 @@ export const STORY_DATA = {
     },
     level_3: {
         scenes: [
-            { image: 'assets/story/l3_1.png' },
+            { image: 'assets/story/l3_1.png', narrativeText: "Hành trình tiếp tục đưa Cáo đến một khu rừng trúc âm u và bí ẩn." },
             { 
                 image: 'assets/story/l3_2.png',
                 dialogue: { 
@@ -66,7 +65,7 @@ export const STORY_DATA = {
     },
     level_4: {
         scenes: [
-            { image: 'assets/story/l4_1.png' },
+            { image: 'assets/story/l4_1.png', narrativeText: "Cáo tiến sâu vào một hang động đầy những tinh thể phát sáng lạ thường." },
             {
                 image: 'assets/story/l4_2.png',
                 dialogue: {
@@ -85,7 +84,7 @@ export const STORY_DATA = {
     },
     level_5: {
         scenes: [
-            { image: 'assets/story/l5_1.png' },
+            { image: 'assets/story/l5_1.png', narrativeText: "Cuối cùng, Cáo đã đến được sào huyệt của Lửng Mật. Sóc yêu đang ở ngay trước mắt!" },
             { 
                 image: 'assets/story/l5_2.png',
                 dialogue: { 
@@ -97,14 +96,13 @@ export const STORY_DATA = {
     },
     gameOutro: {
         scenes: [
-            { image: 'assets/story/outro_1.png' },
-            { image: 'assets/story/outro_2.png' },
-            { image: 'assets/story/outro_3.png' }
+            { image: 'assets/story/outro_1.png', narrativeText: "Vượt qua bao khó khăn, cuối cùng Cáo Anh Hùng cũng đã đến được sào huyệt của Lửng Mật." },
+            { image: 'assets/story/outro_2.png', narrativeText: "Bằng lòng dũng cảm và sức mạnh của tình bạn, Cáo đã giải cứu được Sóc Yêu." },
+            { image: 'assets/story/outro_3.png', narrativeText: "Và họ lại được ở bên nhau, hạnh phúc mãi mãi về sau..." }
         ]
     }
 };
 
-// Sử dụng lời thoại mới của bạn cho các kỷ vật
 export const LEVELS = [
     { 
         level: 1, 

@@ -3,15 +3,12 @@ import { startGame } from './game.js';
 import { state } from './state.js';
 import { allAudio, stopAllSounds } from './audio.js';
 
-// Các biến quản lý trạng thái của màn hình câu chuyện
 let typingInterval = null;
 let currentScenes = [];
 let currentSceneIndex = 0;
 let onStoryComplete = null;
 
 const ALL_SCREENS = ['main-menu', 'game-area', 'world-map-screen', 'game-over-screen', 'level-complete-screen', 'letter-screen', 'story-screen'];
-
-// --- CÁC HÀM ẨN/HIỆN MÀN HÌNH ---
 
 export function hideAllScreens() {
     ALL_SCREENS.forEach(id => {
@@ -23,7 +20,6 @@ export function hideAllScreens() {
 }
 
 export function showScreen(screenId) {
-    // Ẩn các màn hình chính khác trước, nhưng không ẩn các pop-up nhỏ
     ALL_SCREENS.forEach(id => {
         if (id !== screenId && !id.includes('popup') && !id.includes('screen')) {
              const el = document.getElementById(id);
@@ -32,7 +28,6 @@ export function showScreen(screenId) {
              }
         }
     });
-    // Hiện màn hình được yêu cầu
     const screenElement = document.getElementById(screenId);
     if (screenElement) {
         screenElement.classList.remove('hidden');
@@ -55,23 +50,15 @@ export function hidePopup(popupId) {
     }
 }
 
-
-// --- LOGIC KỂ CHUYỆN VÀ HIỆU ỨNG MÁY CHỮ ---
-
-function typewriter(element, text) {
-    // Dừng và xóa hiệu ứng cũ (nếu có)
-    if (typingInterval) {
-        clearInterval(typingInterval);
-    }
+function typewriter(element, text, onComplete) {
+    if (typingInterval) clearInterval(typingInterval);
     allAudio.typing.pause();
     allAudio.typing.currentTime = 0;
 
     let i = 0;
-    element.innerHTML = ''; // Xóa văn bản cũ
-    const dialogueNextBtn = document.getElementById('dialogue-next-btn');
-    dialogueNextBtn.classList.add('hidden'); // Ẩn nút "Tiếp theo" khi đang gõ chữ
-
-    allAudio.typing.play().catch(() => {}); // Bắt đầu phát âm thanh gõ chữ (lặp lại)
+    element.innerHTML = '';
+    
+    allAudio.typing.play().catch(() => {});
 
     typingInterval = setInterval(() => {
         if (i < text.length) {
@@ -80,57 +67,69 @@ function typewriter(element, text) {
         } else {
             clearInterval(typingInterval);
             typingInterval = null;
-            allAudio.typing.pause(); // Dừng âm thanh khi gõ xong
+            allAudio.typing.pause();
             allAudio.typing.currentTime = 0;
-            dialogueNextBtn.classList.remove('hidden'); // Hiện lại nút "Tiếp theo"
+            if (onComplete) onComplete();
         }
-    }, 50); // Tốc độ gõ chữ (50ms mỗi ký tự)
+    }, 50);
 }
 
-function finishTyping() {
-    // Hàm này được gọi khi người dùng muốn bỏ qua hiệu ứng gõ chữ
+function finishTyping(fullText, element, onComplete) {
     if (typingInterval) {
         clearInterval(typingInterval);
         typingInterval = null;
         allAudio.typing.pause();
         allAudio.typing.currentTime = 0;
-        
-        const currentScene = currentScenes[currentSceneIndex -1];
-        if (currentScene && currentScene.dialogue) {
-            document.getElementById('dialogue-text').innerHTML = currentScene.dialogue.text;
-        }
-        document.getElementById('dialogue-next-btn').classList.remove('hidden');
+        element.innerHTML = fullText;
+        if (onComplete) onComplete();
     }
 }
 
 function advanceScene() {
-    // Nếu đang gõ chữ, bấm nút sẽ hiện đầy đủ chữ ngay lập tức
+    const dialogueNextBtn = document.getElementById('dialogue-next-btn');
+    const storyNextBtn = document.getElementById('story-next-btn');
+    const dialogueTextEl = document.getElementById('dialogue-text');
+    const narrativeTextEl = document.getElementById('narrative-text');
+
     if (typingInterval) {
-        finishTyping();
+        const scene = currentScenes[currentSceneIndex - 1];
+        if (scene.dialogue) {
+            finishTyping(scene.dialogue.text, dialogueTextEl, () => dialogueNextBtn.classList.remove('hidden'));
+        } else if (scene.narrativeText) {
+            finishTyping(scene.narrativeText, narrativeTextEl, () => storyNextBtn.classList.remove('hidden'));
+        }
         return;
     }
 
-    // Nếu không, chuyển sang cảnh tiếp theo
     if (currentSceneIndex < currentScenes.length) {
         const scene = currentScenes[currentSceneIndex];
         document.getElementById('story-image').src = scene.image;
-        const dialogueBox = document.getElementById('dialogue-box');
-        const storyNextBtn = document.getElementById('story-next-btn');
         
-        // Điều khiển việc ẩn/hiện của 2 nút "Tiếp theo"
+        const dialogueBox = document.getElementById('dialogue-box');
+        const narrativeBox = document.getElementById('narrative-box');
+        
+        dialogueBox.classList.add('hidden');
+        narrativeBox.classList.add('hidden');
+        storyNextBtn.classList.add('hidden');
+        dialogueNextBtn.classList.add('hidden');
+        
         if (scene.dialogue) {
             dialogueBox.classList.remove('hidden');
-            storyNextBtn.classList.add('hidden'); // Ẩn nút ngoài
             document.getElementById('dialogue-npc-name').textContent = scene.dialogue.name;
-            typewriter(document.getElementById('dialogue-text'), scene.dialogue.text);
+            typewriter(dialogueTextEl, scene.dialogue.text, () => {
+                dialogueNextBtn.classList.remove('hidden');
+            });
+        } else if (scene.narrativeText) {
+            narrativeBox.classList.remove('hidden');
+            typewriter(narrativeTextEl, scene.narrativeText, () => {
+                storyNextBtn.classList.remove('hidden');
+            });
         } else {
-            dialogueBox.classList.add('hidden');
-            storyNextBtn.classList.remove('hidden'); // Hiện nút ngoài
-            document.getElementById('dialogue-text').innerHTML = '';
+            storyNextBtn.classList.remove('hidden');
         }
+        
         currentSceneIndex++;
     } else {
-        // Kết thúc chuỗi câu chuyện
         hidePopup('story-screen');
         if (onStoryComplete) {
             onStoryComplete();
@@ -150,16 +149,12 @@ export function showStoryScene(storyKey, onCompleteCallback) {
     currentSceneIndex = 0;
     onStoryComplete = onCompleteCallback;
 
-    // Gán sự kiện cho cả 2 nút
     document.getElementById('dialogue-next-btn').onclick = advanceScene;
     document.getElementById('story-next-btn').onclick = advanceScene;
 
     showScreen('story-screen');
     advanceScene();
 }
-
-
-// --- CÁC HÀM UI KHÁC ---
 
 export function showWorldMap() {
     const container = document.getElementById('level-selection-container');
@@ -184,12 +179,11 @@ export function showWorldMap() {
 
 export function showLetter() {
     const keepsakeData = LEVELS[state.currentLevelIndex].keepsake;
-    const letterScreen = document.getElementById('letter-screen');
     const letterTitle = document.getElementById('letter-title');
     const letterText = document.getElementById('letter-text');
     const letterImage = document.getElementById('letter-image');
 
-    if (letterScreen && letterTitle && letterText && letterImage) {
+    if (letterTitle && letterText && letterImage) {
         letterTitle.textContent = keepsakeData.title;
         letterText.textContent = keepsakeData.text;
 
