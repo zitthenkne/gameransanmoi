@@ -2,7 +2,8 @@ export const STORY_DATA = {
     gameIntro: {
         scenes: [
             { image: 'assets/story/intro_1.png', narrativeText: "Tại một khu rừng yên bình, Bạn Cáo và Chú Sóc là một cặp đôi iu nhao dô cùng thắm thiếtttttt" },
-            { image: 'assets/story/intro_2.png', narrativeText: "Nhưng bỗng một hôm ... Có một tên Lửng Mật xấu xa vì đem lòng đố kị "Tiên sư cái bọn yêu nhau" thì đã xuất hiện với một cỗ máy khổng lồ nhằm bắt giữ Chú Sóc lại huhu" },
+            // Sửa lỗi: Dùng dấu nháy đơn ' để có thể chứa dấu nháy kép " bên trong
+            { image: 'assets/story/intro_2.png', narrativeText: 'Nhưng bỗng một hôm ... Có một tên Lửng Mật xấu xa vì đem lòng đố kị "Tiên sư cái bọn yêu nhau" thì đã xuất hiện với một cỗ máy khổng lồ nhằm bắt giữ Chú Sóc lại huhu' },
             { image: 'assets/story/intro_3.png', narrativeText: "Hắn nhốt Chú Sóc lại vào một chiếc lồng pha lê mặc kệ Bạn Cáo có khóc than :< " }
         ]
     },
