@@ -18,7 +18,6 @@ export function hideAllScreens() {
         }
     });
 }
-
 export function showScreen(screenId) {
     ALL_SCREENS.forEach(id => {
         if (id !== screenId && !id.includes('popup') && !id.includes('screen')) {
@@ -33,7 +32,6 @@ export function showScreen(screenId) {
         screenElement.classList.remove('hidden');
     }
 }
-
 export function showPopup(popupId) {
     const popupElement = document.getElementById(popupId);
     if (popupElement) {
@@ -42,7 +40,6 @@ export function showPopup(popupId) {
         console.error(`KHÔNG TÌM THẤY POPUP với ID: #${popupId}.`);
     }
 }
-
 export function hidePopup(popupId) {
     const popupElement = document.getElementById(popupId);
     if (popupElement) {
@@ -87,7 +84,7 @@ function finishTyping(fullText, element, onComplete) {
 
 function advanceScene() {
     const dialogueNextBtn = document.getElementById('dialogue-next-btn');
-    const storyNextBtn = document.getElementById('story-next-btn');
+    const storyControls = document.getElementById('story-controls-overlay');
     const dialogueTextEl = document.getElementById('dialogue-text');
     const narrativeTextEl = document.getElementById('narrative-text');
 
@@ -96,7 +93,7 @@ function advanceScene() {
         if (scene.dialogue) {
             finishTyping(scene.dialogue.text, dialogueTextEl, () => dialogueNextBtn.classList.remove('hidden'));
         } else if (scene.narrativeText) {
-            finishTyping(scene.narrativeText, narrativeTextEl, () => storyNextBtn.classList.remove('hidden'));
+            finishTyping(scene.narrativeText, narrativeTextEl, () => storyControls.classList.remove('hidden'));
         }
         return;
     }
@@ -110,7 +107,7 @@ function advanceScene() {
         
         dialogueBox.classList.add('hidden');
         narrativeBox.classList.add('hidden');
-        storyNextBtn.classList.add('hidden');
+        storyControls.classList.add('hidden');
         dialogueNextBtn.classList.add('hidden');
         
         if (scene.dialogue) {
@@ -122,10 +119,10 @@ function advanceScene() {
         } else if (scene.narrativeText) {
             narrativeBox.classList.remove('hidden');
             typewriter(narrativeTextEl, scene.narrativeText, () => {
-                storyNextBtn.classList.remove('hidden');
+                storyControls.classList.remove('hidden');
             });
         } else {
-            storyNextBtn.classList.remove('hidden');
+            storyControls.classList.remove('hidden');
         }
         
         currentSceneIndex++;
@@ -151,6 +148,11 @@ export function showStoryScene(storyKey, onCompleteCallback) {
 
     document.getElementById('dialogue-next-btn').onclick = advanceScene;
     document.getElementById('story-next-btn').onclick = advanceScene;
+    document.getElementById('story-skip-btn').onclick = () => {
+        finishTyping(null, null, null); // Dừng mọi hiệu ứng đang chạy
+        hidePopup('story-screen');
+        if (onStoryComplete) onCompleteCallback();
+    };
 
     showScreen('story-screen');
     advanceScene();

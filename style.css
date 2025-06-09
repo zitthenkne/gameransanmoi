@@ -213,16 +213,6 @@ button:hover {
     margin-right: 0;
 }
 
-.next-btn-overlay {
-    position: absolute;
-    bottom: 20px;
-    right: 20px;
-    font-size: 1.2em;
-    padding: 10px 20px;
-    background-color: #5cb85c;
-}
-
-/* --- Kiểu cho hộp dẫn truyện mới --- */
 #narrative-box {
     position: absolute;
     bottom: 5%;
@@ -242,6 +232,31 @@ button:hover {
     text-align: center;
     font-style: italic;
     margin: 0;
+}
+
+/* --- Kiểu cho các nút điều khiển câu chuyện --- */
+#story-controls-overlay {
+    position: absolute;
+    bottom: 20px;
+    right: 20px;
+    display: flex;
+    gap: 10px;
+}
+
+.next-btn-overlay {
+    font-size: 1.2em;
+    padding: 10px 20px;
+    background-color: #5cb85c;
+}
+
+.skip-btn-overlay {
+    font-size: 1.2em;
+    padding: 10px 20px;
+    background-color: #f0ad4e;
+}
+
+#story-controls-overlay.hidden {
+    display: none;
 }
 
 /* --- Kiểu cho nút điều khiển trên di động --- */
