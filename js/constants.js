@@ -1,19 +1,19 @@
 export const STORY_DATA = {
     gameIntro: {
         scenes: [
-            { image: 'assets/story/intro_1.png', narrativeText: "Tại một khu rừng yên bình, có một Cáo con và một Sóc con..." },
-            { image: 'assets/story/intro_2.png', narrativeText: "Họ là đôi bạn thân, luôn quấn quýt và sẻ chia mọi thứ cùng nhau." },
-            { image: 'assets/story/intro_3.png', narrativeText: "Cho đến một ngày, tên Lửng Mật độc ác xuất hiện và chia cắt đôi bạn..." }
+            { image: 'assets/story/intro_1.png', narrativeText: "Tại một khu rừng yên bình, Bạn Cáo và Chú Sóc là một cặp đôi iu nhao dô cùng thắm thiếtttttt" },
+            { image: 'assets/story/intro_2.png', narrativeText: "Nhưng bỗng một hôm ... Có một tên Lửng Mật xấu xa vì đem lòng đố kị "Tiên sư cái bọn yêu nhau" thì đã xuất hiện với một cỗ máy khổng lồ nhằm bắt giữ Chú Sóc lại huhu" },
+            { image: 'assets/story/intro_3.png', narrativeText: "Hắn nhốt Chú Sóc lại vào một chiếc lồng pha lê mặc kệ Bạn Cáo có khóc than :< " }
         ]
     },
     level_1: {
         scenes: [
-            { image: 'assets/story/l1_1.png', narrativeText: "Cáo bắt đầu hành trình giải cứu... điểm đến đầu tiên là một khu rừng thông đã bị tàn phá." },
+            { image: 'assets/story/l1_1.png', narrativeText: "Bạn Cáo ũ rũ bước đến bên một rừng thông, ngồi thui thủi dưới một gốc cây thông ..." },
             { 
                 image: 'assets/story/l1_2.png',
                 dialogue: { 
                     name: 'Cú Thông Thái', 
-                    text: "Nè chú cáo kia, ta vừa thấy tên Lửng Mật cầm theo 1 chiếc lồng hình pha lê chứa 1 chú sóc con đi về phía khu rừng thông đã bị khai phá kia, giờ chỉ còn là những gốc cây!"
+                    text: "Nè chú cáo kia, ta vừa thấy tên Lửng Mật cầm theo 1 chiếc lồng hình pha lê chứa 1 chú sóc con đi vào phía khu rừng thông đã bị khai phá kia, giờ chỉ còn là những gốc cây! Hắn đi tiếp về phía con suối, vượt qua khu rừng này sẽ thấy!"
                 }
             },
             {
@@ -32,7 +32,7 @@ export const STORY_DATA = {
                 image: 'assets/story/l2_2.png',
                 dialogue: { 
                     name: 'Thú Mỏ Vịt Lập Dị', 
-                    text: "Trời ơi! Ly nước thơm ngon của ta! Lão Lửng đi qua đã làm nó rơi xuống dòng suối mất rồi!"
+                    text: "Trời ơi! Ly nước thơm ngon của ta! Lão Lửng đi qua đã làm nó rơi xuống dòng suối mất rồi! Mà dưới suối toàn sỏi khó chịu, kèm thêm đám tay sai của Lão nữa, ta thật không thể tìm nổi mà!!!"
                 }
             },
             {
@@ -58,26 +58,26 @@ export const STORY_DATA = {
                 image: 'assets/story/l3_2.png',
                 dialogue: {
                     name: 'Gấu Trúc Đỏ Lém Lỉnh',
-                    text: "Nhưng ta chỉ nói cho những người nhanh nhẹn thôi! Hãy chứng tỏ bản thân bằng cách vượt qua khu rừng trúc này đi!"
+                    text: "Nhưng ta chỉ nói cho những người nhanh nhẹn thôi! Hãy chứng tỏ bản thân bằng cách vượt qua khu rừng trúc này đi! Cẩn thận những thân tre nhé, chúng khá nguy hiểm đó, bọn lính canh của Lão Lửng thì vẫn thường xuyên ra vào đó nheeeee hehehe"
                 }
             }
         ]
     },
     level_4: {
         scenes: [
-            { image: 'assets/story/l4_1.png', narrativeText: "Cáo tiến sâu vào một hang động đầy những tinh thể phát sáng lạ thường." },
+            { image: 'assets/story/l4_1.png', narrativeText: "Bạn Cáo tiến sâu vào một hang động đầy những tinh thể phát sáng lạ thường." },
             {
                 image: 'assets/story/l4_2.png',
                 dialogue: {
                     name: 'Tiếng vọng trong hang',
-                    text: "Cẩn thận... cỗ máy của lão ta được vận hành bởi năng lượng của những viên pha lê này..."
+                    text: "Cẩn thận thận thận thận... cỗ máy của lão ta được vận hành bởi năng lượng của những viên pha lê này này này này..."
                 }
             },
             {
                 image: 'assets/story/l4_2.png',
                 dialogue: {
                     name: 'Tiếng vọng trong hang',
-                    text: "Hãy tìm đến sào huyệt chính của lão ở phía bắc ngọn núi... đó là cơ hội duy nhất của cậu..."
+                    text: "Hãy tìm đến sào huyệt chính của lão ở phía bắc ngọn núi núi núi núi... đó là cơ hội duy nhất của ngươi ngươi ngươi ngươi..."
                 }
             }
         ]
@@ -88,17 +88,17 @@ export const STORY_DATA = {
             { 
                 image: 'assets/story/l5_2.png',
                 dialogue: { 
-                    name: 'Cáo Anh Hùng (tự nhủ)', 
-                    text: "Cục dàngggg ... tui tới ngay thui!"
+                    name: 'Bạn Cáo dưỡng thêeeeeee (tự nhủ)', 
+                    text: "Cục dàngggg ... tui tới gòi ạaaaaa!"
                 }
             }
         ]
     },
     gameOutro: {
         scenes: [
-            { image: 'assets/story/outro_1.png', narrativeText: "Vượt qua bao khó khăn, cuối cùng Cáo Anh Hùng cũng đã đến được sào huyệt của Lửng Mật." },
-            { image: 'assets/story/outro_2.png', narrativeText: "Bằng lòng dũng cảm và sức mạnh của tình bạn, Cáo đã giải cứu được Sóc Yêu." },
-            { image: 'assets/story/outro_3.png', narrativeText: "Và họ lại được ở bên nhau, hạnh phúc mãi mãi về sau..." }
+            { image: 'assets/story/outro_1.png', narrativeText: "Vượt qua bao khó khăn, cuối cùng Bạn Cáo cũng đã đến được sào huyệt của Lửng Mật." },
+            { image: 'assets/story/outro_2.png', narrativeText: "Bằng lòng dũng cảm và sức mạnh của tình iuuuu, Bạn Cáo đã giải cứu được Chú Sóc." },
+            { image: 'assets/story/outro_3.png', narrativeText: "Và họ lại được ở bên nhau, hạnh phúc mãi mãi về sau, tên Lửng Mật cũng hoàn lương chuyên chế tạo đồ chơi cho các em nhỏ, cả khu rừng vui vẻ và ấm áp cùng nhau quay quần ăn tiệc chúc mừng Bạn Cáo cứu được Chú Sóc về..." }
         ]
     }
 };
