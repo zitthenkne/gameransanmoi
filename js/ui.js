@@ -43,6 +43,8 @@ export function showPopup(popupId) {
     const popupElement = document.getElementById(popupId);
     if (popupElement) {
         popupElement.classList.remove('hidden');
+    } else {
+        console.error(`KHÔNG TÌM THẤY POPUP với ID: #${popupId}.`);
     }
 }
 
@@ -93,7 +95,6 @@ function finishTyping() {
         allAudio.typing.pause();
         allAudio.typing.currentTime = 0;
         
-        // Hiển thị đầy đủ câu thoại hiện tại
         const currentScene = currentScenes[currentSceneIndex -1];
         if (currentScene && currentScene.dialogue) {
             document.getElementById('dialogue-text').innerHTML = currentScene.dialogue.text;
@@ -114,14 +115,18 @@ function advanceScene() {
         const scene = currentScenes[currentSceneIndex];
         document.getElementById('story-image').src = scene.image;
         const dialogueBox = document.getElementById('dialogue-box');
+        const storyNextBtn = document.getElementById('story-next-btn');
         
+        // Điều khiển việc ẩn/hiện của 2 nút "Tiếp theo"
         if (scene.dialogue) {
             dialogueBox.classList.remove('hidden');
+            storyNextBtn.classList.add('hidden'); // Ẩn nút ngoài
             document.getElementById('dialogue-npc-name').textContent = scene.dialogue.name;
             typewriter(document.getElementById('dialogue-text'), scene.dialogue.text);
         } else {
             dialogueBox.classList.add('hidden');
-            document.getElementById('dialogue-text').innerHTML = ''; // Xóa text cũ
+            storyNextBtn.classList.remove('hidden'); // Hiện nút ngoài
+            document.getElementById('dialogue-text').innerHTML = '';
         }
         currentSceneIndex++;
     } else {
@@ -134,7 +139,7 @@ function advanceScene() {
 }
 
 export function showStoryScene(storyKey, onCompleteCallback) {
-    stopAllSounds(); // Dừng các âm thanh khác khi vào kể chuyện
+    stopAllSounds();
     const storyData = STORY_DATA[storyKey];
     if (!storyData || !storyData.scenes) {
         if (onCompleteCallback) onCompleteCallback();
@@ -145,16 +150,12 @@ export function showStoryScene(storyKey, onCompleteCallback) {
     currentSceneIndex = 0;
     onStoryComplete = onCompleteCallback;
 
-    // Gán sự kiện cho các nút trong màn hình kể chuyện
+    // Gán sự kiện cho cả 2 nút
     document.getElementById('dialogue-next-btn').onclick = advanceScene;
-    document.getElementById('story-skip-btn').onclick = () => {
-        finishTyping(); // Hoàn thành việc gõ chữ
-        hidePopup('story-screen'); // Đóng màn hình
-        if (onStoryComplete) onCompleteCallback(); // Chạy hàm tiếp theo (vào bản đồ)
-    };
+    document.getElementById('story-next-btn').onclick = advanceScene;
 
     showScreen('story-screen');
-    advanceScene(); // Bắt đầu cảnh đầu tiên
+    advanceScene();
 }
 
 
