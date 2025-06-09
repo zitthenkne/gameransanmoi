@@ -1,16 +1,17 @@
-// js/ui.js (Phiên bản sửa lỗi TypeError)
-
 import { STORY_DATA, LEVELS } from './constants.js';
 import { startGame } from './game.js';
 import { state } from './state.js';
+import { allAudio, stopAllSounds } from './audio.js';
 
-let storyImages = [];
-let storyNpc = null;
-let storyImageIndex = 0;
-let storyDialogueIndex = 0;
+// Các biến quản lý trạng thái của màn hình câu chuyện
+let typingInterval = null;
+let currentScenes = [];
+let currentSceneIndex = 0;
 let onStoryComplete = null;
 
 const ALL_SCREENS = ['main-menu', 'game-area', 'world-map-screen', 'game-over-screen', 'level-complete-screen', 'letter-screen', 'story-screen'];
+
+// --- CÁC HÀM ẨN/HIỆN MÀN HÌNH ---
 
 export function hideAllScreens() {
     ALL_SCREENS.forEach(id => {
@@ -22,9 +23,9 @@ export function hideAllScreens() {
 }
 
 export function showScreen(screenId) {
-    // Ẩn các màn hình chính khác trước
+    // Ẩn các màn hình chính khác trước, nhưng không ẩn các pop-up nhỏ
     ALL_SCREENS.forEach(id => {
-        if (id !== screenId && id !== 'level-complete-screen' && id !== 'letter-screen' && id !== 'game-over-screen') {
+        if (id !== screenId && !id.includes('popup') && !id.includes('screen')) {
              const el = document.getElementById(id);
              if (el && !el.classList.contains('hidden')) {
                   el.classList.add('hidden');
@@ -38,14 +39,10 @@ export function showScreen(screenId) {
     }
 }
 
-// SỬA LỖI: Thêm kiểm tra an toàn
 export function showPopup(popupId) {
-    console.log(`Đang cố gắng hiển thị popup: #${popupId}`);
     const popupElement = document.getElementById(popupId);
     if (popupElement) {
         popupElement.classList.remove('hidden');
-    } else {
-        console.error(`KHÔNG TÌM THẤY POPUP với ID: #${popupId}.`);
     }
 }
 
@@ -56,59 +53,112 @@ export function hidePopup(popupId) {
     }
 }
 
-function endStoryScene() {
-    hidePopup('story-screen');
-    if (onStoryComplete) {
-        onStoryComplete();
-    }
-}
 
-export function advanceDialogue() {
-    const dialogueName = document.getElementById('dialogue-npc-name');
-    const dialogueText = document.getElementById('dialogue-text');
-    if (storyNpc && storyDialogueIndex < storyNpc.dialogue.length) {
-        dialogueName.textContent = storyNpc.name;
-        dialogueText.textContent = storyNpc.dialogue[storyDialogueIndex];
-        storyDialogueIndex++;
-    } else {
-        endStoryScene();
-    }
-}
+// --- LOGIC KỂ CHUYỆN VÀ HIỆU ỨNG MÁY CHỮ ---
 
-export function advanceImage() {
-    const storyImageEl = document.getElementById('story-image');
-    const dialogueBox = document.getElementById('dialogue-box');
-    const nextImageBtn = document.getElementById('story-next-image-btn');
-    if (storyImageIndex < storyImages.length) {
-        storyImageEl.src = storyImages[storyImageIndex];
-        dialogueBox.classList.add('hidden');
-        nextImageBtn.classList.remove('hidden');
-        storyImageIndex++;
-    } else {
-        nextImageBtn.classList.add('hidden');
-        if (storyNpc) {
-            dialogueBox.classList.remove('hidden');
-            advanceDialogue();
+function typewriter(element, text) {
+    // Dừng và xóa hiệu ứng cũ (nếu có)
+    if (typingInterval) {
+        clearInterval(typingInterval);
+    }
+    allAudio.typing.pause();
+    allAudio.typing.currentTime = 0;
+
+    let i = 0;
+    element.innerHTML = ''; // Xóa văn bản cũ
+    const dialogueNextBtn = document.getElementById('dialogue-next-btn');
+    dialogueNextBtn.classList.add('hidden'); // Ẩn nút "Tiếp theo" khi đang gõ chữ
+
+    allAudio.typing.play().catch(() => {}); // Bắt đầu phát âm thanh gõ chữ (lặp lại)
+
+    typingInterval = setInterval(() => {
+        if (i < text.length) {
+            element.innerHTML += text.charAt(i);
+            i++;
         } else {
-            endStoryScene();
+            clearInterval(typingInterval);
+            typingInterval = null;
+            allAudio.typing.pause(); // Dừng âm thanh khi gõ xong
+            allAudio.typing.currentTime = 0;
+            dialogueNextBtn.classList.remove('hidden'); // Hiện lại nút "Tiếp theo"
+        }
+    }, 50); // Tốc độ gõ chữ (50ms mỗi ký tự)
+}
+
+function finishTyping() {
+    // Hàm này được gọi khi người dùng muốn bỏ qua hiệu ứng gõ chữ
+    if (typingInterval) {
+        clearInterval(typingInterval);
+        typingInterval = null;
+        allAudio.typing.pause();
+        allAudio.typing.currentTime = 0;
+        
+        // Hiển thị đầy đủ câu thoại hiện tại
+        const currentScene = currentScenes[currentSceneIndex -1];
+        if (currentScene && currentScene.dialogue) {
+            document.getElementById('dialogue-text').innerHTML = currentScene.dialogue.text;
+        }
+        document.getElementById('dialogue-next-btn').classList.remove('hidden');
+    }
+}
+
+function advanceScene() {
+    // Nếu đang gõ chữ, bấm nút sẽ hiện đầy đủ chữ ngay lập tức
+    if (typingInterval) {
+        finishTyping();
+        return;
+    }
+
+    // Nếu không, chuyển sang cảnh tiếp theo
+    if (currentSceneIndex < currentScenes.length) {
+        const scene = currentScenes[currentSceneIndex];
+        document.getElementById('story-image').src = scene.image;
+        const dialogueBox = document.getElementById('dialogue-box');
+        
+        if (scene.dialogue) {
+            dialogueBox.classList.remove('hidden');
+            document.getElementById('dialogue-npc-name').textContent = scene.dialogue.name;
+            typewriter(document.getElementById('dialogue-text'), scene.dialogue.text);
+        } else {
+            dialogueBox.classList.add('hidden');
+            document.getElementById('dialogue-text').innerHTML = ''; // Xóa text cũ
+        }
+        currentSceneIndex++;
+    } else {
+        // Kết thúc chuỗi câu chuyện
+        hidePopup('story-screen');
+        if (onStoryComplete) {
+            onStoryComplete();
         }
     }
 }
 
 export function showStoryScene(storyKey, onCompleteCallback) {
+    stopAllSounds(); // Dừng các âm thanh khác khi vào kể chuyện
     const storyData = STORY_DATA[storyKey];
-    if (!storyData) {
+    if (!storyData || !storyData.scenes) {
         if (onCompleteCallback) onCompleteCallback();
         return;
     }
-    storyImages = storyData.images || [];
-    storyNpc = storyData.npc || null;
-    storyImageIndex = 0;
-    storyDialogueIndex = 0;
+
+    currentScenes = storyData.scenes;
+    currentSceneIndex = 0;
     onStoryComplete = onCompleteCallback;
+
+    // Gán sự kiện cho các nút trong màn hình kể chuyện
+    document.getElementById('dialogue-next-btn').onclick = advanceScene;
+    document.getElementById('story-skip-btn').onclick = () => {
+        finishTyping(); // Hoàn thành việc gõ chữ
+        hidePopup('story-screen'); // Đóng màn hình
+        if (onStoryComplete) onCompleteCallback(); // Chạy hàm tiếp theo (vào bản đồ)
+    };
+
     showScreen('story-screen');
-    advanceImage();
+    advanceScene(); // Bắt đầu cảnh đầu tiên
 }
+
+
+// --- CÁC HÀM UI KHÁC ---
 
 export function showWorldMap() {
     const container = document.getElementById('level-selection-container');
@@ -131,7 +181,6 @@ export function showWorldMap() {
     showScreen('world-map-screen');
 }
 
-// SỬA LỖI: Logic hiển thị màn hình kỷ vật
 export function showLetter() {
     const keepsakeData = LEVELS[state.currentLevelIndex].keepsake;
     const letterScreen = document.getElementById('letter-screen');
@@ -149,7 +198,6 @@ export function showLetter() {
         } else {
             letterImage.classList.add('hidden');
         }
-        // Gọi hàm showPopup an toàn
         showPopup('letter-screen');
     } else {
         console.error("Không tìm thấy các thành phần của màn hình kỷ vật.");

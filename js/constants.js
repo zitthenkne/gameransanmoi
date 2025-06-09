@@ -1,59 +1,110 @@
+// Cấu trúc mới hỗ trợ hội thoại cho từng ảnh
 export const STORY_DATA = {
     gameIntro: {
-        images: ['assets/story/intro_1.png', 'assets/story/intro_2.png', 'assets/story/intro_3.png'],
+        scenes: [
+            { image: 'assets/story/intro_1.png' },
+            { image: 'assets/story/intro_2.png' },
+            { image: 'assets/story/intro_3.png' }
+        ]
     },
     level_1: {
-        images: ['assets/story/l1_1.png', 'assets/story/l1_2.png'],
-        npc: { 
-            name: 'Cú Thông Thái', 
-            dialogue: [
-                "Nè chú cáo kia, ta vừa thấy tên Lửng Mật cầm theo 1 chiếc lồng hình pha lê chứa 1 chú sóc con đi về phía khu rừng thông đã bị khai phá kia, giờ chỉ còn là những gốc cây!",
-                "Để tăng cường sức mạnh hãy cố gắng ăn những trái tim phát sáng, ngoài ra có những vật phẩm hỗ trợ cậu trong quá trình đó, hãy cố gắng tận dụng chúng, à đừng quên coi chừng những tên lính canh là bọn Nhím của tên Lửng đó nhé, động vào là sẽ bị tê liệt ngay!."
-            ]
-        }
+        scenes: [
+            { image: 'assets/story/l1_1.png' },
+            { 
+                image: 'assets/story/l1_2.png',
+                dialogue: { 
+                    name: 'Cú Thông Thái', 
+                    text: "Nè chú cáo kia, ta vừa thấy tên Lửng Mật cầm theo 1 chiếc lồng hình pha lê chứa 1 chú sóc con đi về phía khu rừng thông đã bị khai phá kia, giờ chỉ còn là những gốc cây!"
+                }
+            },
+            {
+                image: 'assets/story/l1_2.png',
+                dialogue: {
+                    name: 'Cú Thông Thái',
+                    text: "Để tăng cường sức mạnh hãy cố gắng ăn những trái tim phát sáng, ngoài ra có những vật phẩm hỗ trợ cậu trong quá trình đó, hãy cố gắng tận dụng chúng, à đừng quên coi chừng những tên lính canh là bọn Nhím của tên Lửng đó nhé, động vào là sẽ bị tê liệt ngay!."
+                }
+            }
+        ]
     },
     level_2: {
-        images: ['assets/story/l2_1.png', 'assets/story/l2_2.png'],
-        npc: { 
-            name: 'Thú Mỏ Vịt Lập Dị', 
-            dialogue: [
-                "Trời ơi!Ly nước thơm ngon của ta! Lão Lửng đi qua đã làm nó rơi xuống dòng suối mất rồi!",
-                "Nếu cậu tìm lại được ly nước thơm ngon đang ẩn dưới kia giúp ta, ta sẽ cho cậu biết lão ta đã đi đâu."
-            ]
-        }
+        scenes: [
+            { image: 'assets/story/l2_1.png' },
+            { 
+                image: 'assets/story/l2_2.png',
+                dialogue: { 
+                    name: 'Thú Mỏ Vịt Lập Dị', 
+                    text: "Trời ơi! Ly nước thơm ngon của ta! Lão Lửng đi qua đã làm nó rơi xuống dòng suối mất rồi!"
+                }
+            },
+            {
+                image: 'assets/story/l2_2.png',
+                dialogue: {
+                    name: 'Thú Mỏ Vịt Lập Dị',
+                    text: "Nếu cậu tìm lại được ly nước thơm ngon đang ẩn dưới kia giúp ta, ta sẽ cho cậu biết lão ta đã đi đâu."
+                }
+            }
+        ]
     },
     level_3: {
-        images: ['assets/story/l3_1.png', 'assets/story/l3_2.png'],
-        npc: { 
-            name: 'Gấu Trúc Đỏ Lém Lỉnh', 
-            dialogue: [
-                "Hehe, người lạ mặt! Thấy ta không? Ta biết lão Lửng đi đâu đấy.",
-                "Nhưng ta chỉ nói cho những người nhanh nhẹn thôi! Hãy chứng tỏ bản thân bằng cách vượt qua khu rừng trúc này đi!"
-            ]
-        }
+        scenes: [
+            { image: 'assets/story/l3_1.png' },
+            { 
+                image: 'assets/story/l3_2.png',
+                dialogue: { 
+                    name: 'Gấu Trúc Đỏ Lém Lỉnh', 
+                    text: "Hehe, người lạ mặt! Thấy ta không? Ta biết lão Lửng đi đâu đấy."
+                }
+            },
+            {
+                image: 'assets/story/l3_2.png',
+                dialogue: {
+                    name: 'Gấu Trúc Đỏ Lém Lỉnh',
+                    text: "Nhưng ta chỉ nói cho những người nhanh nhẹn thôi! Hãy chứng tỏ bản thân bằng cách vượt qua khu rừng trúc này đi!"
+                }
+            }
+        ]
     },
     level_4: {
-        images: ['assets/story/l4_1.png', 'assets/story/l4_2.png'],
-        npc: { 
-            name: 'Tiếng vọng trong hang', 
-            dialogue: [
-                "Cẩn thận... cỗ máy của lão ta được vận hành bởi năng lượng của những viên pha lê này...",
-                "Hãy tìm đến sào huyệt chính của lão ở phía bắc ngọn núi... đó là cơ hội duy nhất của cậu..."
-            ]
-        }
+        scenes: [
+            { image: 'assets/story/l4_1.png' },
+            {
+                image: 'assets/story/l4_2.png',
+                dialogue: {
+                    name: 'Tiếng vọng trong hang',
+                    text: "Cẩn thận... cỗ máy của lão ta được vận hành bởi năng lượng của những viên pha lê này..."
+                }
+            },
+            {
+                image: 'assets/story/l4_2.png',
+                dialogue: {
+                    name: 'Tiếng vọng trong hang',
+                    text: "Hãy tìm đến sào huyệt chính của lão ở phía bắc ngọn núi... đó là cơ hội duy nhất của cậu..."
+                }
+            }
+        ]
     },
     level_5: {
-        images: ['assets/story/l5_1.png', 'assets/story/l5_2.png'],
-        npc: { 
-            name: 'Cáo Anh Hùng (tự nhủ)', 
-            dialogue: ["Cục dàngggg ... tui tới ngay thui!"] 
-        }
+        scenes: [
+            { image: 'assets/story/l5_1.png' },
+            { 
+                image: 'assets/story/l5_2.png',
+                dialogue: { 
+                    name: 'Cáo Anh Hùng (tự nhủ)', 
+                    text: "Cục dàngggg ... tui tới ngay thui!"
+                }
+            }
+        ]
     },
     gameOutro: {
-        images: ['assets/story/outro_1.png', 'assets/story/outro_2.png', 'assets/story/outro_3.png'],
+        scenes: [
+            { image: 'assets/story/outro_1.png' },
+            { image: 'assets/story/outro_2.png' },
+            { image: 'assets/story/outro_3.png' }
+        ]
     }
 };
 
+// Sử dụng lời thoại mới của bạn cho các kỷ vật
 export const LEVELS = [
     { 
         level: 1, 
@@ -119,7 +170,7 @@ export const LEVELS = [
     {
         level: 5, winScore: 120,
         startPos: { x: 10, y: 10 },
-        obstacleImageKey: null, // Màn 5 không có chướng ngại vật tĩnh
+        obstacleImageKey: null,
         backgroundImageKey: "bg_level_5",
         obstacles: [],
         hedgehogs: [ { x: 1, y: 1, dx: 1, dy: 0, range: 17, moved: 0 }, { x: 18, y: 3, dx: -1, dy: 0, range: 17, moved: 0 }, { x: 1, y: 5, dx: 1, dy: 0, range: 17, moved: 0 }, { x: 18, y: 7, dx: -1, dy: 0, range: 17, moved: 0 }, { x: 1, y: 9, dx: 1, dy: 0, range: 17, moved: 0 }, { x: 18, y: 11, dx: -1, dy: 0, range: 17, moved: 0 } ],
