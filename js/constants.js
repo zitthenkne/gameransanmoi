@@ -7,8 +7,8 @@ export const STORY_DATA = {
         npc: { 
             name: 'Cú Thông Thái', 
             dialogue: [
-                "Hỡi Cáo Anh Hùng, Lửng Gắt Gỏng đã đi về phía bờ suối...",
-                "Hãy cho ta thấy lòng dũng cảm của cậu bằng cách thu thập đủ những Dấu Vết Tình Yêu mà Sóc để lại. Chúng sẽ tiếp thêm sức mạnh cho cậu."
+                "Nè chú cáo kia, ta vừa thấy tên Lửng Mật cầm theo 1 chiếc lồng hình pha lê chứa 1 chú sóc con đi về phía khu rừng thông đã bị khai phá kia, giờ chỉ còn là những gốc cây!",
+                "Để tăng cường sức mạnh hãy cố gắng ăn những trái tim phát sáng, ngoài ra có những vật phẩm hỗ trợ cậu trong quá trình đó, hãy cố gắng tận dụng chúng, à đừng quên coi chừng những tên lính canh là bọn Nhím của tên Lửng đó nhé, động vào là sẽ bị tê liệt ngay!."
             ]
         }
     },
@@ -17,8 +17,8 @@ export const STORY_DATA = {
         npc: { 
             name: 'Thú Mỏ Vịt Lập Dị', 
             dialogue: [
-                "Trời ơi! Cái huy hiệu hải quân cổ của ta! Lão Lửng đi qua đã làm nó rơi xuống dòng suối mất rồi!",
-                "Nếu cậu tìm lại đủ những 'Viên Sỏi Ký Ức' lấp lánh dưới kia giúp ta, ta sẽ cho cậu biết lão ta đã đi đâu."
+                "Trời ơi!Ly nước thơm ngon của ta! Lão Lửng đi qua đã làm nó rơi xuống dòng suối mất rồi!",
+                "Nếu cậu tìm lại được ly nước thơm ngon đang ẩn dưới kia giúp ta, ta sẽ cho cậu biết lão ta đã đi đâu."
             ]
         }
     },
@@ -46,7 +46,7 @@ export const STORY_DATA = {
         images: ['assets/story/l5_1.png', 'assets/story/l5_2.png'],
         npc: { 
             name: 'Cáo Anh Hùng (tự nhủ)', 
-            dialogue: ["Sóc yêu... mình đến đây!"] 
+            dialogue: ["Cục dàngggg ... tui tới ngay thui!"] 
         }
     },
     gameOutro: {
@@ -81,8 +81,8 @@ export const LEVELS = [
         powerups: [ { x: 1, y: 7, type: 'shield' } ],
         keepsake: {
             imageKey: "keepsake_2_item",
-            title: "Ly Sinh Tố Mát Lạnh",
-            text: "Trời nóng mà có một ly sinh tố mát lạnh như thế này thì thật tuyệt. Nhưng sẽ còn tuyệt hơn nữa nếu có em ở bên, cùng nhau thưởng thức, cùng nhau nói những câu chuyện không đầu không cuối.",
+            title: "Sinh tố 606 ạaaa",
+            text: "Eeeee bà ưi, chắc là sau buổi hum đó bà mứi thấy có cảm tình với tui nhìu hơn phải hem, dù dì sau bữa đó nhà mik mới gọi tui là chú Sóc màaaaaa, mà tui nói thiệt hôm đó nghe nhà mik rủ mà tui nôn nao cả ngày lun á, bữa hôm đó quả là 1 buổi firstdate thành công mòoooo",
             image: "assets/keepsake_2.png"
         }
     },
@@ -111,7 +111,7 @@ export const LEVELS = [
         powerups: [ { x: 1, y: 13, type: 'shield' }, { x: 18, y: 13, type: 'slowmo' } ],
         keepsake: {
             imageKey: "keepsake_4_item",
-            title: "Đồng Đội Chơi Game",
+            title: "Liên Quân Mô Baiiii",
             text: "Hehe, nhà mik là người con trai đầu tiên tui chơi LQ chung á, cũng nhiều cung bậc cảm xúc dới cái game nì quá ha, cãi nhau gòi cừi khà khà nì, nhà mik cứ cay cú tui chơi con Ishar quài hehe",
             image: "assets/keepsake_4.png"
         }
@@ -126,8 +126,8 @@ export const LEVELS = [
         powerups: [],
         keepsake: {
             imageKey: "keepsake_5_item",
-            title: "Valentine của chúng ta",
-            text: "Ei bà ui, tui gất nà thích hôm đó lun á, mặc dù vừa qua 14/2 thì mik cãi nhau khà khà, nhưng mà kiểu tâm tư tui dành dô món quà hay gì đó, kiểu ngày hôm đó tui thấy siu hạnh phúc lun ớ, đặc biệt là hôm đó tui có bà là người đó valentine dới tuiiiii",
+            title: "Valentineeeeeeeeee",
+            text: "Ei bà ui, tui gất nà thích hôm đó lun á, mặc dù vừa qua 14/2 thì mik cãi nhau khà khà, nhưng mà kiểu tâm tư tui dành dô món quà hay gì đó, kiểu ngày hôm đó tui thấy siu hạnh phúc lun ớ, đặc biệt là hôm đó tui có bà là người đón valentine dới tuiiiii",
             image: "assets/keepsake_5.png"
         }
     }
